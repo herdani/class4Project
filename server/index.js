@@ -1,16 +1,30 @@
-// Filename: index.js
-const express = require("express"); // This loads the Express functionality in
+const express = require("express");
 
-const app = express(); // This instantiates Express so we can use it
+const app = express();
 
-app.use(function requestHandler(request, response) {
-  response.send("Hi everybody! Now it is an Express server");
+const apiRouter = express.Router();
+
+app.use("*", function logGetRequests(req, res, next) {
+  console.log("Someone made a request with the GET method");
+  next();
+});
+
+apiRouter.get("/", function (req, res) {
+  res.send("triggered by GET /api/");
+});
+
+apiRouter.post("/add", function (req, res) {
+  res.send("triggered by POST /api/add");
+});
+
+app.use("/api", apiRouter);
+
+app.get("/", function (req, res) {
+  res.send("index page, triggered by GET /");
 });
 
 const PORT = 8080;
 
-app.listen(PORT, () =>
-  console.log(
-    "This message makes visible to the developer that the server is running, usually you want to include the port number here as well (for debugging purposes)"
-  )
-); // The listen() function starts the Express server, by making it actively listen (to port 8080)
+app.listen(PORT, function () {
+  console.log(`The server is running on port ${PORT}`);
+});
