@@ -1,5 +1,5 @@
 {
-  "name": "class4project",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "nodemon": "^1.19.2"
   }
 }
