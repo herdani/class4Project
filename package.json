@@ -1,11 +1,39 @@
 {
-  "name": "class4project",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+    "name": "class4project",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "client": "npm start --prefix client",
+        "server": "nodemon server/index.js",
+        "start": "concurrently \"npm run server\" \"npm run client\"",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/FaziletKosure/class4Project.git"
+    },
+    "bugs": {
+        "url": "https://github.com/FaziletKosure/class4Project/issues"
+    },
+    "homepage": "https://github.com/FaziletKosure/class4Project#readme",
+    "dependencies": {
+        "concurrently": "^4.1.2",
+        "create-react-app": "^3.1.1",
+        "express": "^4.17.1"
+    },
+    "description": "",
+    "devDependencies": {
+        "eslint": "^6.3.0",
+        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-config-prettier": "^6.3.0",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-jsx-a11y": "^6.2.3",
+        "eslint-plugin-prettier": "^3.1.0",
+        "eslint-plugin-react": "^7.14.3",
+        "husky": "^3.0.5",
+        "lint-staged": "^9.2.5",
+        "prettier": "^1.18.2"
+    }
 }
