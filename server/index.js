@@ -1,30 +1,6 @@
-const express = require("express");
-
-const app = express();
-
-const apiRouter = express.Router();
-
-app.use("*", function logGetRequests(req, res, next) {
-  console.log("Someone made a request with the GET method");
-  next();
-});
-
-apiRouter.get("/", function(req, res) {
-  res.send("triggered by GET /api/ whats up");
-});
-
-apiRouter.post("/add", function(req, res) {
-  res.send("triggered by POST /api/add");
-});
-
-app.use("/api", apiRouter);
-
-app.get("/", function(req, res) {
-  res.send("index page, triggered by GET /");
-});
+const app = require("./app"); // This loads in the code from app.js
 
 const PORT = 8080;
-
 app.listen(PORT, function() {
-  console.log(`The server is running on port ${PORT}`);
-});
+  console.log(`The server is is running on port ${PORT}`);
+}); // We can use that "app" functionality now in this file to start the server
