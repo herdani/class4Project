@@ -9,6 +9,8 @@ function App() {
       </header>
       <form>
         <input type="text"></input>
+        <input type="textarea"></input>
+
       </form>
     </div>
   );
