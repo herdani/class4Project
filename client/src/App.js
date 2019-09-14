@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>Messages From Street</h1>
+        <h1>Messages from Street</h1>
       </header>
       <form>
         <input type="text"></input>
