@@ -20,7 +20,7 @@ USE `Class4Project` ;
 -- -----------------------------------------------------
 -- Table `Class4Project`.`Messages`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Class4Project`.`Messages` (
+CREATE TABLE IF NOT EXISTS `class4project`.`messages` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Body` TEXT NULL,
   `Submission_Date` DATETIME NULL,
