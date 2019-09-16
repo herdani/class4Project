@@ -8,6 +8,8 @@ const app = express(); // Creating an Express instance
 app.use('*', function logGetRequests(req, res, next) {
     // eslint-disable-next-line no-console
     console.log('someone made a request with another method');
+    console.log(req.body);
+
     next();
 });
 
