@@ -1,19 +1,9 @@
-
 const apiRouter = require('express').Router();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const password = require('../../config');
 
-<<<<<<< HEAD
 const connection = mysql.createConnection(password);
-=======
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '1234',
-    database: 'class4project',
-});
->>>>>>> 0e37946a7815605f966a5806c5e30afb2dde32f8
 connection.connect(err => {
     if (!err) console.log('DB connection succeded.');
     else
