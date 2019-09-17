@@ -21,10 +21,18 @@ class Messages extends Component {
         });
     }
 
+    handleDelete = async id => {
+        await Api.deleteMessages({ id: id });
+    };
+
     render() {
         const { messages } = this.state;
         const $messages = messages.map(message => (
-            <Message key={message.id} {...message} />
+            <Message
+                key={message.id}
+                {...message}
+                handleDelete={this.handleDelete}
+            />
         ));
 
         return <ul className="list-group">{$messages}</ul>;

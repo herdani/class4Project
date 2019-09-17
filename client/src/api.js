@@ -42,7 +42,7 @@ class Api {
     }
 
     // static async editTodo(id, todo) {
-    //     const response = await fetch(`${baseUrl}/todos/${id}`, {
+    //     const response = await fetch(`${baseUrl}/message/${id}`, {
     //         method: 'PUT',
     //         ...init,
     //         body: JSON.stringify(todo),
@@ -50,13 +50,19 @@ class Api {
     //     return response.json();
     // }
 
-    // static async deleteTodo(id, todo) {
-    //     const response = await fetch(`${baseUrl}/todos/${id}`, {
-    //         method: 'DELETE',
-    //         ...init,
-    //     });
-    //     return response.json();
-    // }
+    static async deleteMessages(id) {
+        console.log(id);
+        await fetch(`${baseUrl}/message/delete`, {
+            method: 'DELETE',
+            ...init,
+            body: id,
+        })
+            .then(res => res.json())
+            .then(response =>
+                console.log(`success: `, JSON.stringify(response))
+            )
+            .catch(err => console.log(err));
+    }
 }
 
 export default Api;

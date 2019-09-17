@@ -61,6 +61,23 @@ apiRouter.post('/message/add', (req, res) => {
     });
 });
 
+// Delete Message
+apiRouter.delete('/message/delete', (req, res) => {
+    const { id } = req.body;
+    console.log(id);
+    const delMessage = `DELETE from messages where id ='${id}' `;
+    const showAll = `select * from messages;`;
+    connection.query(delMessage, function(error, res0) {
+        if (error) {
+            throw error;
+        } else
+            connection.query(showAll, (err, result) => {
+                if (err) throw err;
+                res.json(result);
+            });
+    });
+});
+
 // Edit Message with the specific id --- NOT FINISHED
 // apiRouter.put('/:id', function(req, res) {
 //     const { id } = req.params;
