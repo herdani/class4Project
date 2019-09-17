@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Sep 17, 2019 at 01:30 PM
+-- Generation Time: Sep 17, 2019 at 10:43 PM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `messages` (
   `id` int(11) NOT NULL,
   `body` text NOT NULL,
-  `submisson_date` datetime NOT NULL,
+  `submission_date` datetime NOT NULL,
   `license_plate` varchar(10) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
@@ -31,7 +31,7 @@ CREATE TABLE `messages` (
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`id`, `body`, `submisson_date`, `license_plate`) VALUES
+INSERT INTO `messages` (`id`, `body`, `submission_date`, `license_plate`) VALUES
 (1, 'The car wasn''t parked in the right place.', '2019-09-15 08:00:00', 'B23090TJ');
 
 --

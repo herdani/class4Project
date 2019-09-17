@@ -20,12 +20,11 @@ apiRouter.get('/', function(req, res) {
 
 apiRouter.post('/message/add', function(req, res) {
     const message = req.body.body;
-    console.log(req.body.body);
     const license = req.body.license_plate;
 
     connection.query(
-        `INSERT INTO messages(body, submission_date, license_plate)
-  VALUES ('${message}', NOW(), '${license}')`,
+        `INSERT INTO messages(body, submission_date, license_plate) VALUES (?, NOW(), ?)`,
+        [message, license],
         function(err) {
             if (err) throw err;
         }
