@@ -4,12 +4,22 @@ const mysql = require('mysql');
 
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: 'password',
+  user: 'nihan',
+  password: '12345',
   database: 'class4Project',
 });
 
-connection.connect();
+connection.connect(err => {
+  if (!err) console.log('DB connection succeded.');
+  else
+    console.log(
+      `DB connection failed \n Error : ${JSON.stringify(
+        err,
+        undefined,
+        2
+      )}`
+    );
+});
 
 // parse application/json
 apiRouter.use(bodyParser.json());
