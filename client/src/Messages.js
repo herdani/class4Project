@@ -11,7 +11,16 @@ class Messages extends Component {
     }
 
     async componentDidMount() {
+        const messages = await Api.getMessages();
+        this.setState({
+            messages,
+        });
+        console.log('did mount');
+    }
+
+    async componentWillMount() {
         this.refreshMessages();
+        console.log('refresh messages');
     }
 
     async refreshMessages() {
@@ -21,8 +30,9 @@ class Messages extends Component {
         });
     }
 
-    handleDelete = async id => {
-        await Api.deleteMessages({ id: id });
+    handleDelete = async _id => {
+        await Api.deleteMessages({ id: _id });
+        this.refreshMessages();
     };
 
     render() {

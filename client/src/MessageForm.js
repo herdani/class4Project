@@ -10,6 +10,13 @@ class MessageForm extends Component {
         };
     }
 
+    getDerivedStateFromProps(props, state) {
+        console.log(' getDerivedStateFromProps', props, state);
+    }
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('getSnapshotBeforeUpdate', prevProps, prevState);
+    }
+
     handleSubmit = async event => {
         event.preventDefault();
         const { license_plate, body } = this.state;

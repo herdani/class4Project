@@ -41,27 +41,13 @@ class Api {
         return response.json();
     }
 
-    // static async editTodo(id, todo) {
-    //     const response = await fetch(`${baseUrl}/message/${id}`, {
-    //         method: 'PUT',
-    //         ...init,
-    //         body: JSON.stringify(todo),
-    //     });
-    //     return response.json();
-    // }
-
     static async deleteMessages(id) {
-        console.log(id);
-        await fetch(`${baseUrl}/message/delete`, {
+        const response = await fetch(`${baseUrl}/message/delete`, {
             method: 'DELETE',
             ...init,
-            body: id,
-        })
-            .then(res => res.json())
-            .then(response =>
-                console.log(`success: `, JSON.stringify(response))
-            )
-            .catch(err => console.log(err));
+            body: JSON.stringify(id),
+        });
+        return response.json();
     }
 }
 
