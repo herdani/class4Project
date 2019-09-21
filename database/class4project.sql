@@ -22,9 +22,9 @@ USE `Class4Project` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `class4project`.`messages` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `Body` TEXT NULL,
-  `Submission_Date` DATETIME NULL,
-  `Licence_Plate` VARCHAR(10) NULL,
+  `body` TEXT NULL,
+  `submission_date` DATETIME NULL,
+  `license_plate` VARCHAR(10) NULL,
   PRIMARY KEY (`Id`))
 ENGINE = InnoDB;
 
