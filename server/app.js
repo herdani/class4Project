@@ -4,6 +4,19 @@ const path = require('path');
 const apiRouter = require('./api'); // Loading in our custom index.js from /api (it will automatically look for index.js)
 
 const app = express(); // Creating an Express instance
+const cors = require('cors');
+
+const whitelist = ['http://localhost:3000'];
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1 || !origin) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+ };
+ app.use(cors(corsOptions));
 
 app.use('*', function logGetRequests(req, res, next) {
     // eslint-disable-next-line no-console
