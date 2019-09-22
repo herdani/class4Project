@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MessageForm from './MessageForm';
- 
+
 function App() {
   return (
     <div className="App">
@@ -12,6 +12,7 @@ function App() {
         </p>
       </header>
       <MessageForm />
+
     </div>
   );
 }

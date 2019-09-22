@@ -24,7 +24,7 @@ apiRouter.post('/message/add', (req, res) => {
     const insertMessage = `INSERT INTO messages (body, submission_date, license_plate) VALUES (?,now(),?);`;
     connection.query(insertMessage, [body, license_plate], (err, result) => {
         if (err) throw err;
-        console.log('post request made: ' + result);
+        console.log(`post request made: ${result}`);
         res.send(result);
     });
 });
