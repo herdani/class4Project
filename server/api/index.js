@@ -5,7 +5,7 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'password',
+    password: '1234',
     database: 'class4project',
 });
 
@@ -18,22 +18,17 @@ apiRouter.get('/', function(req, res) {
     res.send('triggered by GET /api/ path');
 });
 
-apiRouter.post('/message/add', function(req, res) {
-  const message = req.body.Body;
-  console.log(req.body.Body);
-  const license = req.body.Licence_Plate;
-
-  connection.query(`INSERT INTO messages(Body, Submission_Date, Licence_Plate)
-  VALUES ('${message}', NOW(), '${license}')`, function (err, rows, fields) {
-    if (err) throw err
-  });
-  res.send(req.body);
-  
-  
+apiRouter.post('/message/add', (req, res) => {
+    const { body } = req.body;
+    const { license_plate } = req.body;
+    const insertMessage = `INSERT INTO messages (body, submission_date, license_plate) VALUES (?,now(),?);`;
+    connection.query(insertMessage, [body, license_plate], (err, result) => {
+        if (err) throw err;
+        console.log('post request made: ' + result);
+        res.send(result);
+    });
 });
 
 // Application initialization
-
-
 
 module.exports = apiRouter;
