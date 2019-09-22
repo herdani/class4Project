@@ -12,7 +12,7 @@ class MessageForm extends Component {
         };
       }
     addMessage = async (data) => {
-        return fetch(
+/*         return fetch(
             "/message/add", {
                 method: "POST",
                 headers: {
@@ -20,14 +20,17 @@ class MessageForm extends Component {
                 },
                 body: JSON.stringify(data)
             }).then(response => response.json());
-        console.log('added');
-        };
-        /*        const response  = await fetch(`${baseUrl}/todos`, {
-            method: 'POST',
-            ...init,
-            body: JSON.stringify(todo)
-        });
-        return response.json();*/
+        }; */
+
+        const response  = await fetch(`${baseUrl}/api/message/add`, {
+        method: 'POST',
+        headers: {"content-type": "application/json"},
+        mode: 'cors',
+        body: JSON.stringify(data)
+        })
+        console.log(response.body);
+        return response.json();
+    };
 
     
     handleSubmit = async (event) => {
