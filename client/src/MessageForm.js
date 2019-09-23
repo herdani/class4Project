@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
 import api from './apiClient';
-
+import './MessageForm.css';
 
 class MessageForm extends Component {
 
@@ -11,18 +11,6 @@ class MessageForm extends Component {
             submitted: false
         }
       }
-/*     handleLicense = async (event) => {
-        event.preventDefault();
-        console.log('License Added');
-        this.addMessage({
-            body: this.state.body,
-            license_plate: this.state.license_plate
-        });
-    }
-
-    handleMessage = async (event) => {
-
-    } */
 
     handleSubmit = async (event) => {
         event.preventDefault();
@@ -40,25 +28,18 @@ class MessageForm extends Component {
 
     };
 
-/*     async componentDidMount() {
-        const message = await this.addMessage();
-        this.setState({
-            message
-        });
-    } */
-
     render() {
         return(
             <form onSubmit={this.handleSubmit} className="MessageForm">
 
                 {/* this.state.submitted ? <Redirect to="/"/> : null */}
                 <div>
-                    <label htmlFor="license">Enter License Plate</label>
+                    <label htmlFor="license">License Plate</label>
                     <input id="license" name="license" type="text" />
                 </div>
              <br/>
                 <div>
-                    <label htmlFor="body">Enter Message</label>
+                    <label htmlFor="body">Message</label>
                     <textarea id="body" name="body" type="text"/>
                 </div>
                 <div>

@@ -7,12 +7,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-        This is where you can send a message to a license plate
-        </p>
+        <h1>Hello License</h1>
+        <p>Send your messages to a plate number easily!</p>
       </header>
       <MessageForm />
-
     </div>
   );
 }
