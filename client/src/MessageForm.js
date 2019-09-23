@@ -31,8 +31,7 @@ class MessageForm extends Component {
     render() {
         return(
             <form onSubmit={this.handleSubmit} className="MessageForm">
-
-                {/* this.state.submitted ? <Redirect to="/"/> : null */}
+            {this.state.submitted ? <Redirect to="/"/> : null}
                 <div>
                     <label htmlFor="license">License Plate</label>
                     <input id="license" name="license" type="text" />
