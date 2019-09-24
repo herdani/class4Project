@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
 import api from './apiClient';
 import './MessageForm.css';
+import introImage from './assets/messageFormImg.png';
 
 class MessageForm extends Component {
 
@@ -35,6 +36,7 @@ class MessageForm extends Component {
           <div className="MessageFormIntro">
             <h1>Let's share what's on your mind</h1>
             <p>Have thoughts about a car you saw on the street? Say hello to a license number</p>
+            <img src={introImage} alt="This is intro illustration" />
           </div>
           <div>
             <div>
