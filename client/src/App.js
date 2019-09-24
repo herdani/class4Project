@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import './App.css';
 import MessageForm from './MessageForm';
+import MessageList from './MessageList';
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
         <MessageForm />
       </div>
       <div>
-        <MessageForm/>
+        <MessageList/>
       </div>
     </BrowserRouter>
   );

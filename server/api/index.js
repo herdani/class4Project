@@ -5,7 +5,7 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: 'password',
     database: 'class4project',
 });
 
@@ -14,10 +14,18 @@ connection.connect();
 // parse application/json
 apiRouter.use(bodyParser.json());
 
+//list_existing_messages
 apiRouter.get('/', function(req, res) {
     res.send('triggered by GET /api/ path');
+    const insertMessage = `SELECT * FROM messages;`; 
+    connection.query(insertMessage, (err, result) => {
+        if (err) throw err;
+        console.log(`post request made: ${result}`);
+        res.send(result);
+    });
 });
 
+//add new message
 apiRouter.post('/message/add', (req, res) => {
     const { body } = req.body;
     const { license_plate } = req.body;
