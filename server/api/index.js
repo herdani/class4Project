@@ -17,12 +17,12 @@ apiRouter.use(bodyParser.json());
 //list_existing_messages
 apiRouter.get('/', function(req, res) {
     res.send('triggered by GET /api/ path');
-    const insertMessage = `SELECT * FROM messages;`; 
+    const insertMessage = `SELECT * FROM messages (body, submission_date, license_plate);`; 
     connection.query(insertMessage, (err, result) => {
         if (err) throw err;
-        console.log(`post request made: ${result}`);
+        console.log(`get request made: ${result}`);
         res.send(result);
-    });
+    }); 
 });
 
 //add new message
@@ -36,6 +36,8 @@ apiRouter.post('/message/add', (req, res) => {
         res.send(result);
     });
 });
+
+console.log(apiRouter.result);
 
 // Application initialization
 
