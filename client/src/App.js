@@ -14,6 +14,9 @@ function App() {
         </header>
         <MessageForm />
       </div>
+      <div>
+        <MessageForm/>
+      </div>
     </BrowserRouter>
   );
 }
