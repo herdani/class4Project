@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:700|Montserrat&display=swap');
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+.App-header h1 {
+  font-family: 'Inconsolata', monospace;
+  font-size: 2em;
+
+}
+.App-header p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5em;
+}

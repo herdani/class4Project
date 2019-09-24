@@ -29,23 +29,26 @@ class MessageForm extends Component {
     };
 
     render() {
-        return(
-            <form onSubmit={this.handleSubmit} className="MessageForm">
-            {this.state.submitted ? <Redirect to="/"/> : null}
-                <div>
-                    <label htmlFor="license">License Plate</label>
-                    <input id="license" name="license" type="text" />
-                </div>
-             <br/>
-                <div>
-                    <label htmlFor="body">Message</label>
-                    <textarea id="body" name="body" type="text"/>
-                </div>
-                <div>
-                    <input type="submit" value="Submit"/>
-                </div>
-            </form>
-        )
+      return(
+        <form onSubmit={this.handleSubmit} className="MessageForm">
+        {this.state.submitted ? <Redirect to="/"/> : null}
+          <div className="MessageFormIntro">
+            <h1>Let's share what's on your mind</h1>
+            <p>Have thoughts about a car you saw on the street? Say hello to a license number</p>
+          </div>
+          <div>
+            <div>
+              <label htmlFor="license">License Plate</label>
+              <input id="license" name="license" type="text" />
+            </div>
+            <div>
+              <label htmlFor="body">Message</label>
+              <textarea id="body" name="body" type="text"/>
+            </div>
+            <button>Post</button>
+          </div>
+        </form>
+      );
     }
 };
 

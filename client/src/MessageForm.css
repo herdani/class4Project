@@ -1,3 +1,8 @@
 .MessageForm {
-  background-color: grey;
+  display: flex;
+  height: 500px;
+}
+.MessageFormIntro{
+  background: url(./assets/messageFormImg.png);
+  background-size: auto;
 }
