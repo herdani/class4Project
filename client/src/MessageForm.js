@@ -21,17 +21,19 @@ class MessageForm extends Component {
             license_plate: messageData.get('license'),
             body: messageData.get('body')
         });
-
+        
         this.setState({
             submitted: true
-        });
+        })
+        /* console.log(this.state.submitted); */
 
     };
 
     render() {
         return(
             <form onSubmit={this.handleSubmit} className="MessageForm">
-            {this.state.submitted ? <Redirect to="/"/> : null}
+
+            {this.state.submitted ? <Redirect to="/api"/> : null}
                 <div>
                     <label htmlFor="license">License Plate</label>
                     <input id="license" name="license" type="text" />

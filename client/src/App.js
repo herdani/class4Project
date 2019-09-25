@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import './App.css';
 import MessageForm from './MessageForm';
 import MessageList from './MessageList';
@@ -15,9 +15,12 @@ function App() {
         </header>
         <MessageForm />
       </div>
-      <div>
-        <MessageList/>
-      </div>
+      <Switch>
+        <div>
+          <Route exact path="/api" component={MessageList}/>
+        </div>        
+      </Switch>
+
     </BrowserRouter>
   );
 }

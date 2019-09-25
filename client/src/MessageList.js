@@ -25,8 +25,7 @@ class MessageList extends Component {
         } = this.state;
 
         messages.sort(function(a,b){
-            // Turn your strings into dates, and then subtract them
-            // to get a value that is either negative, positive, or zero.
+            //the list will be ordered in descending date order (most recent first)
             return new Date(b.submission_date) - new Date(a.submission_date);
           });
 
@@ -34,7 +33,7 @@ class MessageList extends Component {
 
         return (
             <section className="MessageList">
-               {/*  <p>{messages}</p> */}
+               
                  <ul>
                     {$messages}
                 </ul>
