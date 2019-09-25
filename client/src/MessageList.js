@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import MessageForm from './MessageForm';
 import ApiClient from './apiClient';
-
-/* import './MessageList.css'; */ //will be enabled when css is made
+import './MessageList.css';
 
 
 class MessageList extends Component {
