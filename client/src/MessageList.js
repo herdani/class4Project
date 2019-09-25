@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import MessageForm from './MessageForm';
 import ApiClient from './apiClient';
+<<<<<<< HEAD
 import './MessageList.css';
+=======
+import MessageRow from './MessageRow';
+
+/* import './MessageList.css'; */ //will be enabled when css is made
+>>>>>>> c09c94bd27091d24c613eb501641354a3d598704
 
 
 class MessageList extends Component {
@@ -17,25 +22,25 @@ class MessageList extends Component {
     const messages = await ApiClient.getMessages();
     this.setState({
         messages
-    });
+        });
     }
-};
 
-render() {
-    const {
-        messages
-    } = this.state;
 
-    const $messages = messages.map((message) => <TodoItem key={todo._id} {...todo} />);
+    render() {
+        const {
+            messages
+        } = this.state;
 
-    return (
-        <section className="MessageList">
-            <ul>
-                {$messages}
-            </ul>
-        </section>
-    )
-}
+        const $messages = messages.map((message) => <MessageRow key={message._id} {...message} />);
+
+        return (
+            <section className="MessageList">
+                <ul>
+                    {$messages}
+                </ul>
+            </section>
+        )
+    }
 }
 
 export default MessageList;
