@@ -9,19 +9,17 @@ class apiClient {
           mode: 'cors',
           body: JSON.stringify(data)
       })
-      console.log(response.body);
+    /*   console.log(response.body); */
       return response.json();
   };
 
 //for listing messages, we should get them first.
   getMessages = async (data) => {
-    const response  = await fetch(`${baseUrl}/`, { //route is specified in  server/api/index
+    const response  = await fetch(`${baseUrl}/api`, { //route is specified in  server/api/index
         method: 'GET',
-        headers: {"content-type": "application/json"},
+        headers: {"Accept": "application/json"},
         mode: 'cors',
-        body: JSON.stringify(data)
     })
-    console.log(response.body);
     return response.json();
   };
 };
