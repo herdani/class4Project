@@ -12,7 +12,7 @@ class MessageList extends Component {
     }
 
     async componentDidMount() {
-    const messages = await api.getMessages();
+    const messages = await ApiClient.getMessages();
     this.setState({
         messages
         })
