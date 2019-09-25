@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ApiClient from './apiClient';
+import api from './apiClient';
 import MessageRow from './MessageRow';
 
 /* import './MessageList.css'; */ //will be enabled when css is made
@@ -15,10 +15,10 @@ class MessageList extends Component {
     }
 
     async componentDidMount() {
-    const messages = await ApiClient.getMessages();
+    const messages = await api.getMessages();
     this.setState({
         messages
-        });
+        })
     }
 
 
@@ -27,13 +27,20 @@ class MessageList extends Component {
             messages
         } = this.state;
 
+        messages.sort(function(a,b){
+            // Turn your strings into dates, and then subtract them
+            // to get a value that is either negative, positive, or zero.
+            return new Date(b.submission_date) - new Date(a.submission_date);
+          });
+          
         const $messages = messages.map((message) => <MessageRow key={message._id} {...message} />);
 
         return (
             <section className="MessageList">
-                <ul>
+               {/*  <p>{messages}</p> */}
+                 <ul>
                     {$messages}
-                </ul>
+                </ul> 
             </section>
         )
     }

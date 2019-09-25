@@ -14,25 +14,25 @@ connection.connect();
 // parse application/json
 apiRouter.use(bodyParser.json());
 
-//list_existing_messages
+// list_existing_messages
 apiRouter.get('/', function(req, res) {
-    res.send('triggered by GET /api/ path');
-    const insertMessage = `SELECT * FROM messages (body, submission_date, license_plate);`; 
+    const insertMessage = `SELECT * FROM messages;`;
     connection.query(insertMessage, (err, result) => {
         if (err) throw err;
-        console.log(`get request made: ${result}`);
-        res.send(result);
-    }); 
+        /* console.log(`get request made: ${result}`); */
+        res.json(result);
+        /* console.log(result); */
+    });
 });
 
-//add new message
+// add new message
 apiRouter.post('/message/add', (req, res) => {
     const { body } = req.body;
     const { license_plate } = req.body;
     const insertMessage = `INSERT INTO messages (body, submission_date, license_plate) VALUES (?,now(),?);`;
     connection.query(insertMessage, [body, license_plate], (err, result) => {
         if (err) throw err;
-        console.log(`post request made: ${result}`);
+        /*  console.log(`post request made: ${result}`); */
         res.send(result);
     });
 });
