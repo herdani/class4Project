@@ -16,9 +16,8 @@ function App() {
         <MessageForm />
       </div>
       <Switch>
-        <div>
-          <Route exact path="/api" component={MessageList}/>
-        </div>        
+        <Route exact path="/api" component={MessageList}/>
+        <Route exact path="/" component={MessageList}/>
       </Switch>
 
     </BrowserRouter>

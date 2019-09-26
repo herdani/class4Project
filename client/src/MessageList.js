@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ApiClient from './apiClient';
 import './MessageList.css';
-import MessageRow from './MessageRow';
+import MessageItem from './MessageItem';
 class MessageList extends Component {
 
     constructor(props) {
@@ -29,15 +29,15 @@ class MessageList extends Component {
             return new Date(b.submission_date) - new Date(a.submission_date);
           });
 
-        const $messages = messages.map((message) => <MessageRow key={message._id} {...message} />);
+        const $messages = messages.map((message) => <MessageItem key={message._id} {...message} />);
 
         return (
-            <section className="MessageList">
-               
-                 <ul>
-                    {$messages}
-                </ul>
-            </section>
+          <section className="MessageList">
+            <h1>Message Board</h1>
+             <ul>
+                {$messages}
+            </ul>
+          </section>
         )
     }
 }
