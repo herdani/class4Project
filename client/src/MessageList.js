@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ApiClient from './apiClient';
 import './MessageList.css';
 import MessageItem from './MessageItem';
 

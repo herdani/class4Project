@@ -18,9 +18,7 @@ apiRouter.get('/', function(req, res) {
     const insertMessage = `SELECT * FROM messages;`;
     connection.query(insertMessage, (err, result) => {
         if (err) throw err;
-        /* console.log(`get request made: ${result}`); */
         res.json(result);
-        /* console.log(result); */
     });
 });
 
@@ -31,12 +29,10 @@ apiRouter.post('/message/add', (req, res) => {
     const insertMessage = `INSERT INTO messages (body, submission_date, license_plate) VALUES (?,now(),?);`;
     connection.query(insertMessage, [body, license_plate], (err, result) => {
         if (err) throw err;
-        /*  console.log(`post request made: ${result}`); */
         res.send(result);
     });
 });
 
-/* console.log(apiRouter.result); */
 
 // Application initialization
 
