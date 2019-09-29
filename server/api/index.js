@@ -1,3 +1,5 @@
+import apiKey from './pass';
+
 const apiRouter = require('express').Router();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
@@ -24,11 +26,11 @@ apiRouter.post('/message/add', (req, res) => {
     const insertMessage = `INSERT INTO messages (body, submission_date, license_plate) VALUES (?,now(),?);`;
     connection.query(insertMessage, [body, license_plate], (err, result) => {
         if (err) throw err;
-        console.log(`post request made: ${  result}`);
+        console.log(`post request made: ${result}`);
         res.send(result);
     });
     //
-    const api_key = 'f4ed4318fedd5e200e49a54cf8496df3-baa55c84-2d5ee176';
+    const api_key = apiKey;
     const domain = 'sandbox6062f7c6d10b4b29b35da1c0c31e7721.mailgun.org';
     const mailgun = require('mailgun-js')({ apiKey: api_key, domain });
 
