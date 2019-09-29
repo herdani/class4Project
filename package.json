@@ -14,7 +14,12 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "concurrently": "^4.1.2",
+<<<<<<< HEAD
     "create-react-app": "^3.1.2",
+=======
+    "cors": "^2.8.5",
+    "create-react-app": "^3.1.1",
+>>>>>>> 6095a0f9aa2e6cd3f49c74c523e6ee65e8402ed7
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.20.0",
     "mysql": "^2.17.1",
