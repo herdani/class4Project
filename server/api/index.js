@@ -60,6 +60,16 @@ apiRouter.post('/message/add', (req, res) => {
         }
     });
 });
+// UPDATE MESSAGE EditMessage
+apiRouter.put('/message/:id', (req, res) => {
+    const sql = `UPDATE messages SET body='${req.body.body}', license_plate='${req.body.license_plate}' WHERE id=${req.params.id}`;
+    const query = connection.query(sql, (err, results) => {
+        if (err) throw err;
+        res.send(
+            JSON.stringify({ status: 200, error: null, response: results })
+        );
+    });
+});
 
 // Application initialization
 
