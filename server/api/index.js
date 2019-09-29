@@ -18,7 +18,7 @@ apiRouter.use(bodyParser.json());
 
 // Used list_existing_messages
 apiRouter.get('/', function(req, res) {
-    const insertMessage = `SELECT * FROM messages;`;
+    const insertMessage = `SELECT * FROM messages where deleted=0;`;
     connection.query(insertMessage, (err, result) => {
         if (err) throw err;
         res.json(result);
@@ -62,9 +62,8 @@ apiRouter.post('/message/add', (req, res) => {
 });
 
 // Delete Message
-apiRouter.delete('/message/delete/${id}', (req, res) => {
+apiRouter.delete('/message/delete/:id', (req, res) => {
     const { id } = req.params;
-    console.log(id);
     const showAll = `select * from messages;`;
     const changeBoolean = `update messages set deleted = "1" where id = '${id}'`;
 
