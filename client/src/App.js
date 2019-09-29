@@ -10,24 +10,21 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-        messages: []  
+        messages: []
       }
   }
 
   componentDidMount = async () => {
-    const messages = await ApiClient.getMessages();
-    this.setState({
-        messages
-      });
+    this.refreshList();
   }
 
-  onSubmit = async () =>  {
+  refreshList = async () =>  {
     const messages = await ApiClient.getMessages();
     this.setState({
         messages
     })
   }
-  
+
   render () {
     return (
       <BrowserRouter>
@@ -36,12 +33,12 @@ class App extends Component {
             <h1>Hello License</h1>
             <p>Send your messages to a plate number easily!</p>
           </header>
-          <MessageForm refresher = {this.onSubmit}/>
+          <MessageForm refresher = {this.refreshList}/>
         </div>
         <Switch>
-          <Route exact path="/api"  render ={props => <MessageList messages={this.state.messages} {...props}/> }/>      
+          <Route exact path="/api"  render ={props => <MessageList messages={this.state.messages} {...props}/> }/>
         </Switch>
-      </BrowserRouter>   
+      </BrowserRouter>
     )
   }
 };
