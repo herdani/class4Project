@@ -2,12 +2,12 @@
 const apiRouter = require('express').Router();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
-const api_keys = require('./pass');
+
 
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '1984Fkek',
+  password: 'senAfrika93',
   database: 'class4project',
 });
 
@@ -30,14 +30,14 @@ apiRouter.post('/message/add', (req, res) => {
     res.send(result);
   });
   //
-  const api_key = api_keys;
-  const domain = 'sandbox6062f7c6d10b4b29b35da1c0c31e7721.mailgun.org';
+  const api_key = '637309d8094f9b578d6f7a68cfd5d181-baa55c84-d6fb89fe';
+  const domain = 'sandboxba59f9aaff77478d9b4c22a8f7ee1ee2.mailgun.org';
   const mailgun = require('mailgun-js')({ apiKey: api_key, domain });
 
   const data = {
     from:
-      'class4Project <mailgun@sandbox6062f7c6d10b4b29b35da1c0c31e7721.mailgun.org>',
-    to: 'faziletkosure1@gmail.com',
+      'class4Project <mailgun@sandboxba59f9aaff77478d9b4c22a8f7ee1ee2.mailgun.org>',
+    to: 'avci.msena@gmail.com',
     // to: 'fnakkose@hotmail.com',
     // bcc: 'avci.msena@gmail.com',
     subject: `There is a message for ${req.body.license_plate}.`,
