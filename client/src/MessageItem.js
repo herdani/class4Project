@@ -12,6 +12,3 @@ export default ({ _id, submission_date, license_plate, body}) => {
       </li>
     )
 }
-//this is for trying the loginDB
-
-
