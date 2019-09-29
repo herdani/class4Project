@@ -1,8 +1,8 @@
-import apiKey from './pass';
 
 const apiRouter = require('express').Router();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const api_keys = require('./pass');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -30,7 +30,7 @@ apiRouter.post('/message/add', (req, res) => {
         res.send(result);
     });
     //
-    const api_key = apiKey;
+    const api_key = api_keys;
     const domain = 'sandbox6062f7c6d10b4b29b35da1c0c31e7721.mailgun.org';
     const mailgun = require('mailgun-js')({ apiKey: api_key, domain });
 
