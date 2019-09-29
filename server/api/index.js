@@ -2,7 +2,6 @@ const apiRouter = require('express').Router();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const loginCredentials = require('./loginDB');
-const api_keys = require('./pass');
 
 // ./loginDB file is created in api folder, and added to gitignore.
 // Enter your own login credentials for your MySql database in that file, so no hard coding will be required after push/pull.
@@ -21,23 +20,24 @@ apiRouter.get('/', function(req, res) {
     });
 });
 
-// add new message
 apiRouter.post('/message/add', (req, res) => {
     const { body } = req.body;
     const { license_plate } = req.body;
     const insertMessage = `INSERT INTO messages (body, submission_date, license_plate) VALUES (?,now(),?);`;
     connection.query(insertMessage, [body, license_plate], (err, result) => {
         if (err) throw err;
+        console.log(`post request made: ${result}`);
         res.send(result);
     });
-    const api_key = api_keys;
-    const domain = 'sandbox6062f7c6d10b4b29b35da1c0c31e7721.mailgun.org';
+    //
+    const api_key = '637309d8094f9b578d6f7a68cfd5d181-baa55c84-d6fb89fe';
+    const domain = 'sandboxba59f9aaff77478d9b4c22a8f7ee1ee2.mailgun.org';
     const mailgun = require('mailgun-js')({ apiKey: api_key, domain });
 
     const data = {
         from:
-            'class4Project <mailgun@sandbox6062f7c6d10b4b29b35da1c0c31e7721.mailgun.org>',
-        to: 'faziletkosure1@gmail.com',
+            'class4Project <mailgun@sandboxba59f9aaff77478d9b4c22a8f7ee1ee2.mailgun.org>',
+        to: 'avci.msena@gmail.com',
         // to: 'fnakkose@hotmail.com',
         // bcc: 'avci.msena@gmail.com',
         subject: `There is a message for ${req.body.license_plate}.`,
