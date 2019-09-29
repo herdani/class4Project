@@ -9,6 +9,7 @@ export default ({ _id, submission_date, license_plate, body}) => {
         <span>Time: {timePosted} -  </span>
         <span>To license: {license_plate} : </span>
         <span>   {body}  </span>
+        <button> Comment </button>
       </li>
     )
 }
