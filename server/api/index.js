@@ -1,23 +1,34 @@
+
 require('dotenv').config();
 const apiRouter = require('express').Router();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
-const api_keys = require('./config');
 
+
+// ./loginDB file is created in api folder, and added to gitignore.
+// Enter your own login credentials for your MySql database in that file, so no hard coding will be required after push/pull.
 const connection = mysql.createConnection({
+
     host: process.env.DB_HOST,
     user: process.env.DB_USERNAME,
     password: process.env.DB_USERPASS,
     database: process.env.DB_NAME,
-});
 
+});
 connection.connect();
 
 // parse application/json
 apiRouter.use(bodyParser.json());
 
+
+// Used list_existing_messages
 apiRouter.get('/', function(req, res) {
-    res.send('triggered by GET /api/ path');
+    const insertMessage = `SELECT * FROM messages;`;
+    connection.query(insertMessage, (err, result) => {
+        if (err) throw err;
+        res.json(result);
+    });
+
 });
 
 apiRouter.post('/message/add', (req, res) => {
@@ -28,17 +39,20 @@ apiRouter.post('/message/add', (req, res) => {
         if (err) throw err;
         console.log(`post request made: ${result}`);
         res.send(result);
-        console.log(process.env.USER_NAME);
+
     });
     //
-    const api_key = api_keys;
-    const domain = 'sandbox6062f7c6d10b4b29b35da1c0c31e7721.mailgun.org';
+    const api_key = '637309d8094f9b578d6f7a68cfd5d181-baa55c84-d6fb89fe';
+    const domain = 'sandboxba59f9aaff77478d9b4c22a8f7ee1ee2.mailgun.org';
+
     const mailgun = require('mailgun-js')({ apiKey: api_key, domain });
 
     const data = {
         from:
-            'class4Project <mailgun@sandbox6062f7c6d10b4b29b35da1c0c31e7721.mailgun.org>',
-        to: 'faziletkosure1@gmail.com',
+
+            'class4Project <mailgun@sandboxba59f9aaff77478d9b4c22a8f7ee1ee2.mailgun.org>',
+        to: 'avci.msena@gmail.com',
+
         // to: 'fnakkose@hotmail.com',
         // bcc: 'avci.msena@gmail.com',
         subject: `There is a message for ${req.body.license_plate}.`,
