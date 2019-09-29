@@ -13,7 +13,7 @@ connection.connect();
 // parse application/json
 apiRouter.use(bodyParser.json());
 
-// list_existing_messages
+// Used list_existing_messages
 apiRouter.get('/', function(req, res) {
     const insertMessage = `SELECT * FROM messages;`;
     connection.query(insertMessage, (err, result) => {
@@ -36,7 +36,7 @@ apiRouter.post('/message/add', (req, res) => {
     });
 });
 
-console.log(apiRouter.result);
+/* console.log(apiRouter.result); */
 
 // Application initialization
 

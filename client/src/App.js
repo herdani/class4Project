@@ -1,27 +1,49 @@
-import React from 'react';
+import React, { Component} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import ApiClient from './apiClient';
 import './App.css';
 import MessageForm from './MessageForm';
 import MessageList from './MessageList';
 
 
-function App() {
-  return (
-    <BrowserRouter>
-      <div className="App">
-        <header className="App-header">
-          <h1>Hello License</h1>
-          <p>Send your messages to a plate number easily!</p>
-        </header>
-        <MessageForm />
-      </div>
-      <Switch>
-        <Route exact path="/api" component={MessageList}/>
-        <Route exact path="/" component={MessageList}/>
-      </Switch>
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+        messages: []  
+      }
+  }
 
-    </BrowserRouter>
-  );
-}
+  componentDidMount = async () => {
+    const messages = await ApiClient.getMessages();
+    this.setState({
+        messages
+      });
+  }
+
+  onSubmit = async () =>  {
+    const messages = await ApiClient.getMessages();
+    this.setState({
+        messages
+    })
+  }
+  
+  render () {
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <header className="App-header">
+            <h1>Hello License</h1>
+            <p>Send your messages to a plate number easily!</p>
+          </header>
+          <MessageForm refresher = {this.onSubmit}/>
+        </div>
+        <Switch>
+          <Route exact path="/api"  render ={props => <MessageList messages={this.state.messages} {...props}/> }/>      
+        </Switch>
+      </BrowserRouter>   
+    )
+  }
+};
 
 export default App;

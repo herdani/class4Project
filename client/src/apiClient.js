@@ -9,11 +9,10 @@ class apiClient {
           mode: 'cors',
           body: JSON.stringify(data)
       })
-    /*   console.log(response.body); */
       return response.json();
   };
 
-//for listing messages, we should get them first.
+
   getMessages = async (data) => {
     const response  = await fetch(`${baseUrl}/api`, { //route is specified in  server/api/index
         method: 'GET',
