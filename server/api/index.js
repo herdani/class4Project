@@ -1,41 +1,14 @@
-<<<<<<< HEAD
-const loginCredentials = require('./loginDB')
-
-=======
 
 require('dotenv').config();
->>>>>>> 63c0391deca7612840eb09d59288de8dd4c85ab8
 const apiRouter = require('express').Router();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const cors = require('cors');
 
-<<<<<<< HEAD
-apiRouter.use(bodyParser.json());
-
-
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-// const whitelist = ['http://localhost:3000'];
-// const corsOptions = {
-//     origin: function (origin, callback) {
-//         if (whitelist.indexOf(origin) !== -1 || !origin) {
-//             callback(null, true)
-//         } else {
-//             callback(new Error('Not allowed by CORS'))
-//         }
-//     }
-// };
-apiRouter.use(cors());
-// ./loginDB file is created in api folder, and added to gitignore.
-//Enter your own login credentials for your MySql database in that file, so no hard coding will be required after push/pull.
-const connection = mysql.createConnection(loginCredentials);
-=======
 
 // ./loginDB file is created in api folder, and added to gitignore.
 // Enter your own login credentials for your MySql database in that file, so no hard coding will be required after push/pull.
 const connection = mysql.createConnection({
->>>>>>> 63c0391deca7612840eb09d59288de8dd4c85ab8
 
     host: process.env.DB_HOST,
     user: process.env.DB_USERNAME,
@@ -47,15 +20,6 @@ connection.connect();
 
 apiRouter.get("/", function(req, res) {
 
-<<<<<<< HEAD
-  let sql = `SELECT * FROM messages where deleted = ?`;
-    connection.query(sql, [false], (error, results) => {
-        if (error) {
-            return console.error(error.message);
-        }
-        res.send(results);
-});
-=======
 
 // Used list_existing_messages
 apiRouter.get('/', function(req, res) {
@@ -65,7 +29,6 @@ apiRouter.get('/', function(req, res) {
         res.json(result);
     });
 
->>>>>>> 63c0391deca7612840eb09d59288de8dd4c85ab8
 });
 
 
@@ -92,11 +55,7 @@ apiRouter.post('/message/add', (req, res) => {
     const insertMessage = `INSERT INTO messages (body, submission_date, license_plate) VALUES (?,now(),?);`;
     connection.query(insertMessage, [body, license_plate], (err, result) => {
         if (err) throw err;
-<<<<<<< HEAD
-        /*  console.log(`post request made: ${result}`); */
-=======
         console.log(`post request made: ${result}`);
->>>>>>> 63c0391deca7612840eb09d59288de8dd4c85ab8
         res.send(result);
 
     });

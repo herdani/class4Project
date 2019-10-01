@@ -1,8 +1,4 @@
 node_modules
-<<<<<<< HEAD
-./api/loginDB.js
-=======
 .env
 
 
->>>>>>> 63c0391deca7612840eb09d59288de8dd4c85ab8
