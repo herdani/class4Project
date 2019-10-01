@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import api from './apiClient';
+import ApiClient from './ApiClient';
 import './MessageForm.css';
 
 class MessageForm extends Component {
@@ -13,7 +13,7 @@ class MessageForm extends Component {
     handleSubmit = async (event) => {
         event.preventDefault();
         const messageData = new FormData(event.target);
-        await api.addMessage({
+        await ApiClient.addMessage({
             license_plate: messageData.get('license'),
             body: messageData.get('body')
         });

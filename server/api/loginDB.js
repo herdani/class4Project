@@ -1,7 +1,7 @@
 const loginCredentials = {
     host: 'localhost',
-    user: 'root',
-    password: 'root',
+    user: 'abdu',
+    password: '123456',
     database: 'class4project',
 };
 
