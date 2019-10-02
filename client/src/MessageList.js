@@ -6,7 +6,6 @@ class MessageList extends Component {
 
     constructor(props) {
         super(props);
-    
     }
 
     render() {
@@ -19,7 +18,7 @@ class MessageList extends Component {
             return new Date(b.submission_date) - new Date(a.submission_date);
           });
 
-        const $messages = messages.map((message) => <MessageItem key={message._id} {...message} />);
+        const $messages = messages.map((message) => <MessageItem key={message.id} {...message} />);
 
         return (
           <section className="MessageList">

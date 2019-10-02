@@ -12,7 +12,6 @@ class apiClient {
       return response.json();
   };
 
-
   getMessages = async (data) => {
     const response  = await fetch(`${baseUrl}/api`, { //route is specified in  server/api/index
         method: 'GET',
@@ -21,9 +20,16 @@ class apiClient {
     })
     return response.json();
   };
+
+  addComment = async (data) => {
+      const response  = await fetch(`${baseUrl}/api/comment/add`, {
+          method: 'POST',
+          headers: {"content-type": "application/json"},
+          mode: 'cors',
+          body: JSON.stringify(data)
+      })
+      return response.json();
+  };
 };
-
-
-
 
 export default new apiClient();

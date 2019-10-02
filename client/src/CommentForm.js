@@ -1,34 +1,53 @@
 import React, {Component} from 'react';
-import './CommentForm.css';
+import './Comment.css';
 import api from './apiClient';
 import {CommentButton} from './views/CommentButton';
 
 class CommentForm extends Component {
   constructor(props){
       super(props);
+
       this.state = {
           commented: false
       }
   }
-
-handleClickComment = async(event) => {
+handleClickComment = () => {
+  this.setState({commented: true});
+}
+handleClickCancelComment = () => {
+  this.setState({commented: false});
+}
+handleCommentPost = async(event) => {
   event.preventDefault();
     console.log("comment");
+    const data = new FormData(event.target);
+    await api.addComment({
+        body: data.get('body'),
+        email: data.get('email'),
+        message_id: this.props.messageId
+    });
   }
     render() {
-        return(
-            <form  className="CommentForm">
-              <div>
-                <label htmlFor="email">Email</label>
-                <input id="email" name="email" type="email" />
-              </div>
-              <div>
+          if(this.state.commented === false) {
+            return(
+              <CommentButton onClick = {this.handleClickComment}/>
+            );
+          } else {
+            return(
+              <form onSubmit={this.handleCommentPost} className="CommentForm">
+                <div>
+                  <label htmlFor="email">Email</label>
+                  <input id="email" name="email" type="email" />
+                </div>
+                <div>
                   <label htmlFor="body">Comment</label>
                   <textarea id="body" name="body" type="text"/>
                 </div>
-              <CommentButton onClick = {this.handleClickComment}/>
-            </form>
-        )
+                <input type="submit" value="Post Comment"/>
+                <button onClick = {this.handleClickCancelComment}>Cancel</button>
+              </form>
+            );
+          }
     }
 };
 
