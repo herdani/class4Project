@@ -13,7 +13,7 @@ Create a `.env` file similar to `.envTemplate` and update the values according y
 ## Adapt database changes
 
 Here we list all changes we made to the database structure.
-Don't forget to check this out for new lines after you pulled new code 
+Don't forget to check this out for new lines after you pulled new code
 
 
 ## Mysql (if you use Docker)
@@ -26,3 +26,11 @@ Don't forget to check this out for new lines after you pulled new code
 
 `docker start class4ProjectMySQL`
 
+### Database for table "comments"
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `submission_date` datetime NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `body` text NOT NULL,
+  `message_id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
