@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './MessageList.css';
 import MessageItem from './MessageItem';
 
+
 class MessageList extends Component {
 
     constructor(props) {

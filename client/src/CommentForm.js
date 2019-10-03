@@ -11,22 +11,25 @@ class CommentForm extends Component {
           commented: false
       }
   }
-handleClickComment = () => {
-  this.setState({commented: true});
-}
-handleClickCancelComment = () => {
-  this.setState({commented: false});
-}
-handleCommentPost = async(event) => {
-  event.preventDefault();
-    console.log("comment");
-    const data = new FormData(event.target);
-    await api.addComment({
-        body: data.get('body'),
-        email: data.get('email'),
-        message_id: this.props.messageId
-    });
+  handleClickComment = () => {
+    this.setState({commented: true});
   }
+  handleClickCancelComment = () => {
+    this.setState({commented: false});
+  }
+  handleCommentPost = async(event) => {
+    event.preventDefault();
+      console.log("comment");
+      const data = new FormData(event.target);
+      await api.addComment({
+          body: data.get('body'),
+          email: data.get('email'),
+          message_id: this.props.messageId
+      });
+      this.props.refresher();
+      console.log(this.props.refresher);
+    };
+
     render() {
           if(this.state.commented === false) {
             return(
