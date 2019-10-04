@@ -19,11 +19,21 @@ class apiClient {
       headers: { "Accept": "application/json" },
       mode: 'cors',
     })
+    // console.log(response.json());
     return response.json();
   };
+  getMessage = async (id) => {
+    const response = await fetch(`${baseUrl}/api/message/:${id}`, {
+      method: 'GET',
+      headers: { "Accept": "application/json" },
+      mode: 'cors',
+    });
+    // console.log(response.json());
+    return response.json();
+  }
   // UPDATE MESSAGE EditMessage
   editMessage = async (id, data) => {
-    const response = await fetch(`${baseUrl}/api/message/${id}`, {
+    const response = await fetch(`${baseUrl}/api/message/:${id}`, {
       method: 'PUT',
       headers: { "content-type": "application/json" },
       mode: 'cors',

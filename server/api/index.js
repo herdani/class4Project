@@ -17,7 +17,7 @@ connection.connect();
 apiRouter.use(bodyParser.json());
 
 // Used list_existing_messages
-apiRouter.get('/', function(req, res) {
+apiRouter.get('/', function (req, res) {
     const insertMessage = `SELECT * FROM messages;`;
     connection.query(insertMessage, (err, result) => {
         if (err) throw err;
@@ -45,14 +45,11 @@ apiRouter.post('/message/add', (req, res) => {
         from:
             'Class4Project <mailgun@sandbox6062f7c6d10b4b29b35da1c0c31e7721.mailgun.org>',
         to: 'faziletkosure1@gmail.com',
-
-        // to: 'fnakkose@hotmail.com',
-        // bcc: 'avci.msena@gmail.com',
         subject: `There is a message for ${req.body.license_plate}.`,
         text: req.body.body,
     };
 
-    mailgun.messages().send(data, function(error, body) {
+    mailgun.messages().send(data, function (error, body) {
         if (error) {
             console.log(error);
         } else {
@@ -64,11 +61,25 @@ apiRouter.post('/message/add', (req, res) => {
 apiRouter.put('/message/:id', (req, res) => {
     const sql = `UPDATE messages SET body='${req.body.body}', license_plate='${req.body.license_plate}' WHERE id=${req.params.id}`;
     const query = connection.query(sql, (err, results) => {
-        if (err) throw err;
+        // if (err) throw err;
+        console.log("[mysql error]", err);
         res.send(
-            JSON.stringify({ status: 200, error: null, response: results })
+            // JSON.stringify({ status: 200, error: null, response: results })
+            results
         );
     });
+});
+
+// Get an message
+apiRouter.get('/message/:id', (req, res) => {
+    connection.query(
+        'SELECT * FROM messages WHERE id = ?',
+        [req.params.id],
+        (err, rows, fields) => {
+            if (!err) res.send(rows);
+            else console.log(err);
+        }
+    );
 });
 
 // Application initialization
