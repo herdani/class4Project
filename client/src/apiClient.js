@@ -23,7 +23,7 @@ class apiClient {
     return response.json();
   };
   getMessage = async (id) => {
-    const response = await fetch(`${baseUrl}/api/message/:${id}`, {
+    const response = await fetch(`${baseUrl}/api/message/${id}`, {
       method: 'GET',
       headers: { "Accept": "application/json" },
       mode: 'cors',

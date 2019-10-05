@@ -9,7 +9,9 @@ class EditMessage extends Component {
         super(props);
         this.state = {
             submitted: false,
-            message:[]
+            message:[],
+            body:'',
+            license_plate:''
         }
     }
     
@@ -33,36 +35,28 @@ class EditMessage extends Component {
         this.props.refresher();
        
     };
-    //
-    // handleSubmit = async (event) => {
-    //     event.preventDefault();
-    //     const id = this.props.match.params.id;
-    //     const messageData = new FormData(event.target);
-    //     await api.editMessage(id,{
-    //         license_plate: messageData.get('license'),
-    //         body: messageData.get('body')
-    //     });
-    //     this.setState({
-    //         submitted: true
-    //     }
-    
-    //     )
+    componentDidMount = async () => {
+        //console.log(this.props);
+        const id = this.props.match.params.id;
+        const message = await api.getMessage(id);
+        // console.log(message);
+        this.setState({
+          message,
+          body:Object.values(message[0])[1],
+          license_plate:Object.values(message[0])[3]
+        })
+        // console.log(Object.values(message[0])[1]);
+        // console.log(Object.values(message[0])[3])
+      }
 
-    //     this.props.refresher();
-       
-    // };
    
   handleInputChange(e){
     const target = e.target;
     const value = target.value;
     const name = target.name;
-
-   
   } 
 
     render() {
-        const {plate}=this.props.message;
-        console.log(this.props.message);
         return(
             <form onSubmit={this.handleSubmit} className="EditMessage
         ">
@@ -70,11 +64,11 @@ class EditMessage extends Component {
              <h1>Edit Message</h1>
                 <div>
                     <label htmlFor="license">License Plate</label>
-                        <input id="license" name="license"  value={this.props.message.license_plate}  onChange={this.handleInputChange}  type="text" />
+                        <input id="license" name="license"  defaultValue={this.state.license_plate}  onChange={this.handleInputChange}  type="text" />
                 </div>
                 <div>
                     <label htmlFor="body">Message</label>
-                    <textarea id="body" name="body" value={this.props.message.body}  onChange={this.handleInputChange}  type="text"/>
+                    <input id="body" name="body" defaultValue={this.state.body}  onChange={this.handleInputChange}  type="text" />
                 </div>
                 <div>
                     <input type="submit" value="Edit"/>
