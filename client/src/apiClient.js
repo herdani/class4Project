@@ -33,11 +33,11 @@ class apiClient {
   }
   // UPDATE MESSAGE EditMessage
   editMessage = async (id, data) => {
-    const response = await fetch(`${baseUrl}/api/message/:${id}`, {
+    const response = await fetch(`${baseUrl}/api/message/${id}`, {
       method: 'PUT',
       headers: { "content-type": "application/json" },
       mode: 'cors',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
 
     return response.json();

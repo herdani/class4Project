@@ -5,7 +5,7 @@ import './App.css';
 import MessageForm from './MessageForm';
 import MessageList from './MessageList';
 import EditMessage from './EditMessage';
-// import apiClient from './apiClient';
+import apiClient from './apiClient';
 
 
 class App extends Component {
@@ -25,7 +25,7 @@ class App extends Component {
   async componentDidMount() {
     console.log(this.props);
     const id = this.props.match.params.id;
-    const message = await ApiClient.getMessage(id);
+    const message = await apiClient.getMessage(id);
     console.log(message);
     this.setState({
       message
