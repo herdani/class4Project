@@ -7,24 +7,7 @@ class MessageList extends Component {
 
   constructor(props) {
     super(props);
-    // 
-
   }
-  onEditClick = async (id, data) => {
-    console.log(id);
-
-    this.setState({
-      ...this.props,
-      editingMessageId: id
-    });
-  }
-  // onEditClick = (id) => {
-  //   console.log(id);
-
-  //   const editingMessageId = id;
-  //   this.setState({ editingMessageId });
-  // }
-
 
   render() {
     const {
@@ -36,7 +19,7 @@ class MessageList extends Component {
       return new Date(b.submission_date) - new Date(a.submission_date);
     });
 
-    const $messages = messages.map((message) => <MessageItem key={message._id} {...message} onEditClick={this.onEditClick} />);
+    const $messages = messages.map((message) => <MessageItem key={message._id} {...message} />);
     if (this.props.messages.editingMessageId) {
       return <Redirect to={`/api/message/:${this.props.messages.editingMessageId}`} />
     };
