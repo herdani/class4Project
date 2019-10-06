@@ -26,8 +26,6 @@ class CommentForm extends Component {
           email: data.get('email'),
           message_id: this.props.messageId
       });
-      this.props.refresher();
-      console.log(this.props.refresher);
     };
 
     render() {

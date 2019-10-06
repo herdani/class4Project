@@ -17,7 +17,7 @@ class MessageItem extends Component {
     this.refreshList();
   }
 
-  refreshList = async () =>  {
+  refreshList = async (id) =>  {
     const comments = await ApiClient.getMessages();
     this.setState({
         comments
@@ -33,7 +33,7 @@ class MessageItem extends Component {
       <span>To license: {license_plate}</span>
       <span>   {body}  </span>
       <CommentForm refresher = {this.refreshList} messageId = {id} />
-      <CommentList  comments = {comments}/>
+      <CommentList comments = {comments}/>
     </li>
     )
   }
