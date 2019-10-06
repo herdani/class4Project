@@ -66,14 +66,9 @@ apiRouter.delete('/message/:id', (req, res) => {
     const { id } = req.params;
     const changeBoolean = `update messages set deleted = "1" where id = '${id}'`;
 
-    connection.query(showAll, (err, result) => {
-        if (err) {
-            throw err;
-        } else
-            connection.query(changeBoolean, (err, resBool) => {
-                if (err) throw err;
-                res.json(resBool);
-            });
+    connection.query(changeBoolean, (err, result) => {
+        if (err) throw err;
+        res.json(result);
     });
 });
 
