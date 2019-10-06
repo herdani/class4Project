@@ -7,6 +7,7 @@ const init = {
 };
 
 class apiClient {
+<<<<<<< HEAD
 
 getMessages= async () => {
       const response  = await fetch(`${baseUrl}/api`, {
@@ -45,6 +46,34 @@ getMessages= async () => {
   // }
 
 
+=======
+    addMessage = async data => {
+        const response = await fetch(`${baseUrl}/api/message/add`, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            mode: 'cors',
+            body: JSON.stringify(data),
+        });
+        return response.json();
+    };
+
+    getMessages = async data => {
+        const response = await fetch(`${baseUrl}/api`, {
+            //route is specified in  server/api/index
+            method: 'GET',
+            headers: { Accept: 'application/json' },
+            mode: 'cors',
+        });
+        return response.json();
+    };
+
+    deleteMessage = async id => {
+        const response = await fetch(`${baseUrl}/api/message/${id}`, {
+            method: 'DELETE',
+        });
+        return response.json();
+    };
+>>>>>>> ff7064e713a999216bc78b260d6a6b9a5ae26239
 }
 
 export default new apiClient;

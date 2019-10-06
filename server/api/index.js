@@ -1,11 +1,16 @@
+<<<<<<< HEAD
 
 require('dotenv').config()
+=======
+require('dotenv').config();
+>>>>>>> ff7064e713a999216bc78b260d6a6b9a5ae26239
 const apiRouter = require('express').Router();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const cors = require('cors');
 const loginCredentials= require('./loginDB')
 
+<<<<<<< HEAD
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // ./loginDB file is created in api folder, and added to gitignore.
@@ -19,18 +24,36 @@ const connection = mysql.createConnection(loginCredentials);
 //     // password: process.env.DB_USERPASS,
 //     // database: process.env.DB_NAME,
 // }
+=======
+// ./loginDB file is created in api folder, and added to gitignore.
+// Enter your own login credentials for your MySql database in that file, so no hard coding will be required after push/pull.
+const connection = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_USERPASS,
+    database: process.env.DB_NAME,
+});
+>>>>>>> ff7064e713a999216bc78b260d6a6b9a5ae26239
 connection.connect();
 apiRouter.use(bodyParser.json());
+<<<<<<< HEAD
 // Used list_existing_messages
 apiRouter.get('/', function(req, res) {
     const insertMessage = "SELECT * FROM messages where deleted =?"
     connection.query(insertMessage, [false],(err, result) => {
+=======
+
+// Used list_existing_messages
+apiRouter.get('/', function(req, res) {
+    const insertMessage = `SELECT * FROM messages where deleted=0;`;
+    connection.query(insertMessage, (err, result) => {
+>>>>>>> ff7064e713a999216bc78b260d6a6b9a5ae26239
         if (err) throw err;
         res.json(result);
     });
-
 });
 
+<<<<<<< HEAD
 
 
 apiRouter.delete("/message/:id", urlencodedParser,function(req, res) {
@@ -48,6 +71,9 @@ apiRouter.delete("/message/:id", urlencodedParser,function(req, res) {
   
   });
 // add new message
+=======
+// Post Message
+>>>>>>> ff7064e713a999216bc78b260d6a6b9a5ae26239
 apiRouter.post('/message/add', (req, res) => {
     console.log(req.body);
     const {body} = req.body;
@@ -57,7 +83,6 @@ apiRouter.post('/message/add', (req, res) => {
         if (err) throw err;
         console.log(`post request made: ${result}`);
         res.send(result);
-
     });
     //
     const api_key = '637309d8094f9b578d6f7a68cfd5d181-baa55c84-d6fb89fe';
@@ -67,7 +92,6 @@ apiRouter.post('/message/add', (req, res) => {
 
     const data = {
         from:
-
             'class4Project <mailgun@sandboxba59f9aaff77478d9b4c22a8f7ee1ee2.mailgun.org>',
         to: 'avci.msena@gmail.com',
 
@@ -86,7 +110,20 @@ apiRouter.post('/message/add', (req, res) => {
     });
 });
 
+<<<<<<< HEAD
 /* console.log(apiRouter.result); */
+=======
+// Delete Message
+apiRouter.delete('/message/:id', (req, res) => {
+    const { id } = req.params;
+    const changeBoolean = `update messages set deleted = "1" where id = '${id}'`;
+
+    connection.query(changeBoolean, (err, result) => {
+        if (err) throw err;
+        res.json(result);
+    });
+});
+>>>>>>> ff7064e713a999216bc78b260d6a6b9a5ae26239
 
 // Application initialization
 

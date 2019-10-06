@@ -5,33 +5,37 @@ import ApiClient from './apiClient'
 
 
 class MessageList extends Component {
-
     constructor(props) {
         super(props);
-    
     }
    
     
     render() {
-        const {
-            messages
-        } = this.props;
+        const { messages } = this.props;
 
-        messages.sort(function(a,b){
+        messages.sort(function(a, b) {
             //the list will be ordered in descending date order (most recent first)
             return new Date(b.submission_date) - new Date(a.submission_date);
-          });
+        });
 
+<<<<<<< HEAD
         const $messages = messages.map((message) => <MessageItem handleDelete={this.props.handleDelete} key={message._id} {...message} />);
+=======
+        const $messages = messages.map(message => (
+            <MessageItem
+                key={message._id}
+                {...message}
+                handleDelete={this.props.handleDelete}
+            />
+        ));
+>>>>>>> ff7064e713a999216bc78b260d6a6b9a5ae26239
 
         return (
-          <section className="MessageList">
-            <h1>Message Board</h1>
-             <ul>
-                {$messages}
-            </ul>
-          </section>
-        )
+            <section className="MessageList">
+                <h1>Message Board</h1>
+                <ul>{$messages}</ul>
+            </section>
+        );
     }
 }
 
