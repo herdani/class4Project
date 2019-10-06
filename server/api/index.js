@@ -1,30 +1,30 @@
 
-require('dotenv').config();
+require('dotenv').config()
 const apiRouter = require('express').Router();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const cors = require('cors');
+const loginCredentials= require('./loginDB')
 
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // ./loginDB file is created in api folder, and added to gitignore.
 // Enter your own login credentials for your MySql database in that file, so no hard coding will be required after push/pull.
-const connection = mysql.createConnection({
+const connection = mysql.createConnection(loginCredentials);
 
-    host: process.env.DB_HOST,
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_USERPASS,
-    database: process.env.DB_NAME,
+// {
 
-});
+//     // host: process.env.DB_HOST,
+//     // user: process.env.DB_USERNAME,
+//     // password: process.env.DB_USERPASS,
+//     // database: process.env.DB_NAME,
+// }
 connection.connect();
-
-apiRouter.get("/", function(req, res) {
-
-
+apiRouter.use(bodyParser.json());
 // Used list_existing_messages
 apiRouter.get('/', function(req, res) {
-    const insertMessage = `SELECT * FROM messages;`;
-    connection.query(insertMessage, (err, result) => {
+    const insertMessage = "SELECT * FROM messages where deleted =?"
+    connection.query(insertMessage, [false],(err, result) => {
         if (err) throw err;
         res.json(result);
     });
@@ -35,7 +35,7 @@ apiRouter.get('/', function(req, res) {
 
 apiRouter.delete("/message/:id", urlencodedParser,function(req, res) {
   const {id} = req.params;
-  var sql= "UPDATE messages SET deleted = 1 WHERE id = ?"
+  var sql= "UPDATE messages SET deleted = 1 WHERE id= ?"
   
    connection.query( sql, [id], function (error, result) {
     if (error) throw error;

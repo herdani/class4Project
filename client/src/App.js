@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import ApiClient from './apiClient';
+import apiClient from './apiClient';
 import './App.css';
 import MessageForm from './MessageForm';
 import MessageList from './MessageList';
@@ -19,11 +19,20 @@ class App extends Component {
   }
 
   refreshList = async () =>  {
-    const messages = await ApiClient.getMessages();
+    const messages = await apiClient.getMessages();
     this.setState({
         messages
     })
   }
+  
+  handleDelete =  (id) => {
+    
+   apiClient.deleteMessage(id);
+   this.refreshList();
+   console.log(id);
+   
+    
+};
 
   render () {
     return (
@@ -33,10 +42,10 @@ class App extends Component {
             <h1>Hello License</h1>
             <p>Send your messages to a plate number easily!</p>
           </header>
-          <MessageForm refresher = {this.refreshList}/>
+          <MessageForm refreshList = {this.refreshList}/>
         </div>
         <Switch>
-          <Route exact path="/api"  render ={props => <MessageList messages={this.state.messages} {...props}/> }/>
+          <Route exact path="/api"  render ={props => <MessageList handleDelete={this.handleDelete} refreshList = {this.refreshList} messages={this.state.messages} {...props}/> }/>
         </Switch>
       </BrowserRouter>
     )

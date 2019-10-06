@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './MessageList.css';
 import MessageItem from './MessageItem';
+import ApiClient from './apiClient'
+
 
 class MessageList extends Component {
 
@@ -8,7 +10,8 @@ class MessageList extends Component {
         super(props);
     
     }
-
+   
+    
     render() {
         const {
             messages
@@ -19,7 +22,7 @@ class MessageList extends Component {
             return new Date(b.submission_date) - new Date(a.submission_date);
           });
 
-        const $messages = messages.map((message) => <MessageItem key={message._id} {...message} />);
+        const $messages = messages.map((message) => <MessageItem handleDelete={this.props.handleDelete} key={message._id} {...message} />);
 
         return (
           <section className="MessageList">
