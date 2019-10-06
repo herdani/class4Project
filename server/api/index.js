@@ -43,6 +43,7 @@ apiRouter.get('/comments/:message_id', function(req, res) {
     });
 });
 
+// Post Message
 apiRouter.post('/message/add', (req, res) => {
     const { body, license_plate } = req.body;
     const insertMessage = `INSERT INTO messages (body, submission_date, license_plate) VALUES (?,now(),?);`;
@@ -89,5 +90,16 @@ apiRouter.post('/comment/add', (req, res) => {
         }
     );
 });
+// Delete Message
+apiRouter.delete('/message/:id', (req, res) => {
+    const { id } = req.params;
+    const changeBoolean = `update messages set deleted = "1" where id = '${id}'`;
+
+    connection.query(changeBoolean, (err, result) => {
+        if (err) throw err;
+        res.json(result);
+    });
+});
+
 // Application initialization
 module.exports = apiRouter;

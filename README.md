@@ -4,7 +4,7 @@
 
 `npm install`
 `cd client`
-``npm isntall``
+`npm isntall`
 
 ## Configure your environment variables
 
@@ -15,6 +15,7 @@ Create a `.env` file similar to `.envTemplate` and update the values according y
 Here we list all changes we made to the database structure.
 Don't forget to check this out for new lines after you pulled new code
 
+`` ALTER TABLE `class4project`.`messages` ADD COLUMN `deleted` TINYINT NULL DEFAULT 0 AFTER `license_plate`; ``
 
 ## Mysql (if you use Docker)
 

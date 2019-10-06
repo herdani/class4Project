@@ -38,6 +38,7 @@ class MessageItem extends Component {
       <span>Time: {timePosted}</span>
       <span>To license: {license_plate}</span>
       <span>   {body}  </span>
+      <button onClick={() => handleDelete(id)}>X</button>
       <CommentForm refresher = {this.refreshList} messageId = {id} />
       <CommentList  comments = {this.state.comments}/>
     </li>
