@@ -20,14 +20,6 @@ class apiClient {
     })
     return response.json();
   };
-  getComments = async (data) => {
-    const response  = await fetch(`${baseUrl}/api/comments`, {
-        method: 'GET',
-        headers: {"Accept": "application/json"},
-        mode: 'cors',
-    })
-    return response.json();
-  };
 
   getCommentsById = async (message_id) => {
     const response  = await fetch(`${baseUrl}/api/comments/${message_id}`, {
