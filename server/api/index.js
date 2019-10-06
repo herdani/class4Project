@@ -62,9 +62,8 @@ apiRouter.post('/message/add', (req, res) => {
 });
 
 // Delete Message
-apiRouter.delete('/message/delete/:id', (req, res) => {
+apiRouter.delete('/message/:id', (req, res) => {
     const { id } = req.params;
-    const showAll = `select * from messages;`;
     const changeBoolean = `update messages set deleted = "1" where id = '${id}'`;
 
     connection.query(showAll, (err, result) => {

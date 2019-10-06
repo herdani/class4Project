@@ -22,7 +22,7 @@ class apiClient {
     };
 
     deleteMessage = async id => {
-        const response = await fetch(`${baseUrl}/api/message/delete/${id}`, {
+        const response = await fetch(`${baseUrl}/api/message/${id}`, {
             method: 'DELETE',
         });
         return response.json();
