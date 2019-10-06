@@ -1,29 +1,30 @@
-import React, { Component} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ApiClient from './apiClient';
 import './App.css';
 import MessageForm from './MessageForm';
 import MessageList from './MessageList';
 
-
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-        messages: []
-      }
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            messages: [],
+        };
+    }
 
   componentDidMount = async () => {
-    this.refreshList();
-  }
+      this.refreshList();
+  };
 
-  refreshList = async () =>  {
-    const messages = await ApiClient.getMessages();
-    this.setState({
-        messages
-    })
-  }
+  refreshList = async () => {
+      const messages = await ApiClient.getMessages();
+      this.setState({
+          messages,
+        
+      });
+  };
+
   refreshComments = async () => {
     const comments = await ApiClient.getComments();
     console.log(comments);
@@ -32,6 +33,11 @@ class App extends Component {
     const commentsById = await ApiClient.getCommentsById(message_id);
     console.log(commentsById);
   }
+  handleDelete = async id => {
+    await ApiClient.deleteMessage(id);
+    this.refreshList();
+  };
+
   render () {
     return (
       <BrowserRouter>
@@ -43,7 +49,13 @@ class App extends Component {
           <MessageForm refresher = {this.refreshList}/>
         </div>
         <Switch>
-          <Route exact path="/api"  render ={props => <MessageList messages={this.state.messages} {...props}/> }/>
+          <Route exact path="/api"  render ={props => 
+          <MessageList 
+            messages={this.state.messages} 
+            {...props} 
+            handleDelete={this.handleDelete}
+            /> 
+          }/>
         </Switch>
       </BrowserRouter>
     )

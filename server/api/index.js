@@ -3,6 +3,8 @@ const apiRouter = require('express').Router();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
+// ./loginDB file is created in api folder, and added to gitignore.
+// Enter your own login credentials for your MySql database in that file, so no hard coding will be required after push/pull.
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USERNAME,
@@ -16,9 +18,8 @@ apiRouter.use(bodyParser.json());
 
 // Used list_existing_messages
 apiRouter.get('/', function(req, res) {
-    // selecting the data from table 'messages'
-    const selectMessages = `SELECT * FROM messages;`;
-    connection.query(selectMessages, (err, result) => {
+    const insertMessage = `SELECT * FROM messages where deleted=0;`;
+    connection.query(insertMessage, (err, result) => {
         if (err) throw err;
         // selecting the data from table 'comments' inside the select 'messages'
         // so it will showing comments that belong to a specific message.
@@ -43,6 +44,7 @@ apiRouter.get('/comments/:message_id', function(req, res) {
     });
 });
 
+// Post Message
 apiRouter.post('/message/add', (req, res) => {
     const { body, license_plate } = req.body;
     const insertMessage = `INSERT INTO messages (body, submission_date, license_plate) VALUES (?,now(),?);`;
@@ -89,5 +91,16 @@ apiRouter.post('/comment/add', (req, res) => {
         }
     );
 });
+// Delete Message
+apiRouter.delete('/message/:id', (req, res) => {
+    const { id } = req.params;
+    const changeBoolean = `update messages set deleted = "1" where id = '${id}'`;
+
+    connection.query(changeBoolean, (err, result) => {
+        if (err) throw err;
+        res.json(result);
+    });
+});
+
 // Application initialization
 module.exports = apiRouter;

@@ -31,13 +31,14 @@ class MessageItem extends Component {
   }
 
   render() {
-    const { id, submission_date, license_plate, body} = this.props;
+    const { id, submission_date, license_plate, body, handleDelete} = this.props;
     var timePosted = moment(submission_date).format("DD/MM/YYYY - HH:mm");
     return (
       <li className="MessageItem">
       <span>Time: {timePosted}</span>
       <span>To license: {license_plate}</span>
       <span>   {body}  </span>
+      <button onClick={() => handleDelete(id)}>X</button>
       <CommentForm refresher = {this.refreshList} messageId = {id} />
       <CommentList  comments = {this.state.comments}/>
     </li>
