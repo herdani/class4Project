@@ -13,26 +13,28 @@ class App extends Component {
         };
     }
 
-    componentDidMount = async () => {
-        this.refreshList();
-    };
+  componentDidMount = async () => {
+      this.refreshList();
+  };
 
-  refreshList = async () =>  {
-    const messages = await ApiClient.getMessages();
-    this.setState({
-        messages
-    })
-  }
+  refreshList = async () => {
+      const messages = await ApiClient.getMessages();
+      this.setState({
+          messages,
+      });
+  };
+
   refreshComments = async () => {
     const comments = await ApiClient.getComments();
   }
   refreshCommentsById = async (message_id) => {
     const commentsById = await ApiClient.getCommentsById(message_id);
   }
-
   handleDelete = async id => {
-      await ApiClient.deleteMessage(id);
-      this.refreshList();
+    console.log("deleted");
+    await ApiClient.deleteMessage(id);
+    this.refreshList();
+
   };
 
   render () {
@@ -46,17 +48,14 @@ class App extends Component {
           <MessageForm refresher = {this.refreshList}/>
         </div>
         <Switch>
-          <Route exact path="/api"  render ={props => <MessageList messages={this.state.messages} {...props}/> }/>
-          <Route
-              path="/"
-              render={props => (
-                  <MessageList
-                      messages={this.state.messages}
-                      {...props}
-                      handleDelete={this.handleDelete}
-                  />
-              )}
-          />
+          <Route exact path="/api"  render ={props =>
+            <MessageList
+              messages={this.state.messages}
+              {...props}
+              refresher={this.refreshList}
+              handleDelete={this.handleDelete}
+              />
+          }/>
         </Switch>
       </BrowserRouter>
     )

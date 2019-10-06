@@ -21,6 +21,11 @@ class MessageItem extends Component {
     })
   }
 
+  componentDidUpdate(lastProps) {
+    if (this.props.comments != lastProps.comments)
+      this.setState({ comments: this.props.comments });
+  }
+
 
   refreshList = async () =>  {
     const comments = await ApiClient.getCommentsById(this.props.id);
@@ -31,7 +36,7 @@ class MessageItem extends Component {
   }
 
   render() {
-    const { id, submission_date, license_plate, body} = this.props;
+    const { id, submission_date, license_plate, body, handleDelete, refresher, comments} = this.props;
     var timePosted = moment(submission_date).format("DD/MM/YYYY - HH:mm");
     return (
       <li className="MessageItem">

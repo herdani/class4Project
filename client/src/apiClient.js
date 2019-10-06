@@ -39,12 +39,13 @@ class apiClient {
       })
       return response.json();
   };
-};
- deleteMessage = async id => {
+
+  deleteMessage = async id => {
     const response = await fetch(`${baseUrl}/api/message/${id}`, {
         method: 'DELETE',
     });
     return response.json();
+  };
 };
 
 export default new apiClient();

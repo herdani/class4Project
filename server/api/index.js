@@ -3,6 +3,8 @@ const apiRouter = require('express').Router();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
+// ./loginDB file is created in api folder, and added to gitignore.
+// Enter your own login credentials for your MySql database in that file, so no hard coding will be required after push/pull.
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USERNAME,
@@ -17,7 +19,7 @@ apiRouter.use(bodyParser.json());
 // Used list_existing_messages
 apiRouter.get('/', function(req, res) {
     // selecting the data from table 'messages'
-    const selectMessages = `SELECT * FROM messages;`;
+    const selectMessages = `SELECT * FROM messages where deleted=0;`;
     connection.query(selectMessages, (err, result) => {
         if (err) throw err;
         // selecting the data from table 'comments' inside the select 'messages'
