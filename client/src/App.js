@@ -24,7 +24,14 @@ class App extends Component {
         messages
     })
   }
-
+  refreshComments = async () => {
+    const comments = await ApiClient.getComments();
+    console.log(comments);
+  }
+  refreshCommentsById = async (message_id) => {
+    const commentsById = await ApiClient.getCommentsById(message_id);
+    console.log(commentsById);
+  }
   render () {
     return (
       <BrowserRouter>

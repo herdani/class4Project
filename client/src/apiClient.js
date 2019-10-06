@@ -20,6 +20,23 @@ class apiClient {
     })
     return response.json();
   };
+  getComments = async (data) => {
+    const response  = await fetch(`${baseUrl}/api/comments`, {
+        method: 'GET',
+        headers: {"Accept": "application/json"},
+        mode: 'cors',
+    })
+    return response.json();
+  };
+
+  getCommentsById = async (data, message_id) => {
+    const response  = await fetch(`${baseUrl}/api/comments/${message_id}`, {
+        method: 'GET',
+        headers: {"Accept": "application/json"},
+        mode: 'cors',
+    })
+    return response.json();
+  };
 
   addComment = async (data) => {
       const response  = await fetch(`${baseUrl}/api/comment/add`, {
