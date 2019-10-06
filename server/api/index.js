@@ -35,14 +35,6 @@ apiRouter.get('/', function(req, res) {
     });
 });
 
-apiRouter.get('/comments', function(req, res) {
-    const selectComments = `SELECT * FROM comments;`;
-    connection.query(selectComments, (err, result) => {
-        if (err) throw err;
-        res.json(result);
-    });
-});
-
 apiRouter.get('/comments/:message_id', function(req, res) {
     const selectedCommentById = `SELECT * FROM comments WHERE message_id = ${req.params.message_id};`;
     connection.query(selectedCommentById, (err, result) => {

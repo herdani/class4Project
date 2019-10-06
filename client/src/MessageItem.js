@@ -13,19 +13,25 @@ class MessageItem extends Component {
         comments: []
       }
   }
+
   componentDidMount = async () => {
-    this.refreshList();
+    let comments = this.props.comments
+    this.setState({
+      comments
+    })
   }
 
-  refreshList = async (id) =>  {
-    const comments = await ApiClient.getMessages();
+
+  refreshList = async () =>  {
+    const comments = await ApiClient.getCommentsById(this.props.id);
+
     this.setState({
         comments
     })
   }
 
   render() {
-    const { id, submission_date, license_plate, body, comments} = this.props;
+    const { id, submission_date, license_plate, body} = this.props;
     var timePosted = moment(submission_date).format("DD/MM/YYYY - HH:mm");
     return (
       <li className="MessageItem">
@@ -33,24 +39,11 @@ class MessageItem extends Component {
       <span>To license: {license_plate}</span>
       <span>   {body}  </span>
       <CommentForm refresher = {this.refreshList} messageId = {id} />
-      <CommentList comments = {comments}/>
+      <CommentList  comments = {this.state.comments}/>
     </li>
     )
   }
 }
 
-/* export default ({ id, submission_date, license_plate, body, comments}) => {
-    var timePosted = moment(submission_date).format("DD/MM/YYYY - HH:mm");
-  console.log(app.refreshlist)
-    return (
-      <li className="MessageItem">
-        <span>Time: {timePosted}</span>
-        <span>To license: {license_plate}</span>
-        <span>   {body}  </span>
-        <CommentForm refresher = {app.refreshList} messageId = {id} />
-        <CommentList  comments = {comments}/>
-      </li>
-    )
-} */
 
 export default MessageItem

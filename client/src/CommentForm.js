@@ -19,13 +19,13 @@ class CommentForm extends Component {
   }
   handleCommentPost = async(event) => {
     event.preventDefault();
-      console.log("comment");
       const data = new FormData(event.target);
       await api.addComment({
           body: data.get('body'),
           email: data.get('email'),
           message_id: this.props.messageId
       });
+      this.props.refresher();
     };
 
     render() {
