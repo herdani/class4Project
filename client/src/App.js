@@ -23,18 +23,9 @@ class App extends Component {
           messages,
       });
   };
-
-  refreshComments = async () => {
-    const comments = await ApiClient.getComments();
-  }
-  refreshCommentsById = async (message_id) => {
-    const commentsById = await ApiClient.getCommentsById(message_id);
-  }
   handleDelete = async id => {
-    console.log("deleted");
     await ApiClient.deleteMessage(id);
     this.refreshList();
-
   };
 
   render () {
@@ -48,7 +39,7 @@ class App extends Component {
           <MessageForm refresher = {this.refreshList}/>
         </div>
         <Switch>
-          <Route exact path="/api"  render ={props =>
+          <Route exact path="/api" render ={props =>
             <MessageList
               messages={this.state.messages}
               {...props}

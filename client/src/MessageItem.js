@@ -1,54 +1,22 @@
-import React, {Component} from 'react';
+import React from 'react';
 import moment from 'moment';
 import './MessageItem.css';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
-import ApiClient from './apiClient';
-import app from'./App';
 
-class MessageItem extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-        comments: []
-      }
-  }
-
-  componentDidMount = async () => {
-    let comments = this.props.comments
-    this.setState({
-      comments
-    })
-  }
-
-  componentDidUpdate(lastProps) {
-    if (this.props.comments != lastProps.comments)
-      this.setState({ comments: this.props.comments });
-  }
-
-
-  refreshList = async () =>  {
-    const comments = await ApiClient.getCommentsById(this.props.id);
-
-    this.setState({
-        comments
-    })
-  }
-
-  render() {
-    const { id, submission_date, license_plate, body, handleDelete, refresher, comments} = this.props;
-    var timePosted = moment(submission_date).format("DD/MM/YYYY - HH:mm");
-    return (
-      <li className="MessageItem">
+const MessageItem = props => {
+  const { id, submission_date, license_plate, body, handleDelete, refresher, comments} = props;
+  var timePosted = moment(submission_date).format("DD/MM/YYYY - HH:mm");
+  return (
+    <li className="MessageItem">
       <span>Time: {timePosted}</span>
       <span>To license: {license_plate}</span>
       <span>   {body}  </span>
-      <button onClick={() => handleDelete(id)}>X</button>
-      <CommentForm refresher = {this.refreshList} messageId = {id} />
-      <CommentList  comments = {this.state.comments}/>
+      <CommentForm refresher = {refresher} messageId = {id} />
+      <button onClick={() => handleDelete(id)}>Delete Message</button>
+      <CommentList  comments = {comments}/>
     </li>
-    )
-  }
+  );
 }
 
 
