@@ -18,9 +18,6 @@ class MessageList extends Component {
             return new Date(b.submission_date) - new Date(a.submission_date);
         });
 
-<<<<<<< HEAD
-        const $messages = messages.map((message) => <MessageItem handleDelete={this.props.handleDelete} key={message._id} {...message} />);
-=======
         const $messages = messages.map(message => (
             <MessageItem
                 key={message._id}
@@ -28,7 +25,6 @@ class MessageList extends Component {
                 handleDelete={this.props.handleDelete}
             />
         ));
->>>>>>> ff7064e713a999216bc78b260d6a6b9a5ae26239
 
         return (
             <section className="MessageList">

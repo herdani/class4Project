@@ -1,79 +1,26 @@
-<<<<<<< HEAD
-
-require('dotenv').config()
-=======
 require('dotenv').config();
->>>>>>> ff7064e713a999216bc78b260d6a6b9a5ae26239
 const apiRouter = require('express').Router();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const cors = require('cors');
 const loginCredentials= require('./loginDB')
 
-<<<<<<< HEAD
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
-
 // ./loginDB file is created in api folder, and added to gitignore.
 // Enter your own login credentials for your MySql database in that file, so no hard coding will be required after push/pull.
 const connection = mysql.createConnection(loginCredentials);
-
-// {
-
-//     // host: process.env.DB_HOST,
-//     // user: process.env.DB_USERNAME,
-//     // password: process.env.DB_USERPASS,
-//     // database: process.env.DB_NAME,
-// }
-=======
-// ./loginDB file is created in api folder, and added to gitignore.
-// Enter your own login credentials for your MySql database in that file, so no hard coding will be required after push/pull.
-const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_USERPASS,
-    database: process.env.DB_NAME,
-});
->>>>>>> ff7064e713a999216bc78b260d6a6b9a5ae26239
 connection.connect();
 apiRouter.use(bodyParser.json());
-<<<<<<< HEAD
-// Used list_existing_messages
-apiRouter.get('/', function(req, res) {
-    const insertMessage = "SELECT * FROM messages where deleted =?"
-    connection.query(insertMessage, [false],(err, result) => {
-=======
 
 // Used list_existing_messages
 apiRouter.get('/', function(req, res) {
     const insertMessage = `SELECT * FROM messages where deleted=0;`;
     connection.query(insertMessage, (err, result) => {
->>>>>>> ff7064e713a999216bc78b260d6a6b9a5ae26239
         if (err) throw err;
         res.json(result);
     });
 });
 
-<<<<<<< HEAD
-
-
-apiRouter.delete("/message/:id", urlencodedParser,function(req, res) {
-  const {id} = req.params;
-  var sql= "UPDATE messages SET deleted = 1 WHERE id= ?"
-  
-   connection.query( sql, [id], function (error, result) {
-    if (error) throw error;
-    console.log(id, " Deleted!")
-    
-  });
-  
-  //  connection.end();
-  
-  
-  });
-// add new message
-=======
 // Post Message
->>>>>>> ff7064e713a999216bc78b260d6a6b9a5ae26239
 apiRouter.post('/message/add', (req, res) => {
     console.log(req.body);
     const {body} = req.body;
@@ -110,9 +57,6 @@ apiRouter.post('/message/add', (req, res) => {
     });
 });
 
-<<<<<<< HEAD
-/* console.log(apiRouter.result); */
-=======
 // Delete Message
 apiRouter.delete('/message/:id', (req, res) => {
     const { id } = req.params;
@@ -123,7 +67,6 @@ apiRouter.delete('/message/:id', (req, res) => {
         res.json(result);
     });
 });
->>>>>>> ff7064e713a999216bc78b260d6a6b9a5ae26239
 
 // Application initialization
 
