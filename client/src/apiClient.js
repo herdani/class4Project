@@ -1,25 +1,23 @@
 const baseUrl = 'http://localhost:8080';
 
 class apiClient {
-
-  addMessage = async (data) => {
+  addMessage = async data => {
     const response = await fetch(`${baseUrl}/api/message/add`, {
       method: 'POST',
-      headers: { "content-type": "application/json" },
+      headers: { 'content-type': 'application/json' },
       mode: 'cors',
-      body: JSON.stringify(data)
-    })
+      body: JSON.stringify(data),
+    });
     return response.json();
   };
 
-
-  getMessages = async (data) => {
-    const response = await fetch(`${baseUrl}/api`, { //route is specified in  server/api/index
+  getMessages = async data => {
+    const response = await fetch(`${baseUrl}/api`, {
+      //route is specified in  server/api/index
       method: 'GET',
-      headers: { "Accept": "application/json" },
+      headers: { Accept: 'application/json' },
       mode: 'cors',
-    })
-    // console.log(response.json());
+    });
     return response.json();
   };
   getMessage = async (id) => {
@@ -42,10 +40,14 @@ class apiClient {
 
     return response.json();
   }
-};
 
-
-
+  deleteMessage = async id => {
+    const response = await fetch(`${baseUrl}/api/message/${id}`, {
+      method: 'DELETE',
+    });
+    return response.json();
+  };
+}
 
 
 
