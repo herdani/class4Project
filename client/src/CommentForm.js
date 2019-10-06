@@ -27,7 +27,6 @@ class CommentForm extends Component {
           message_id: this.props.messageId
       });
       this.props.refresher();
-      console.log(this.props.refresher);
     };
 
     render() {

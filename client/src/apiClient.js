@@ -29,7 +29,7 @@ class apiClient {
     return response.json();
   };
 
-  getCommentsById = async (data, message_id) => {
+  getCommentsById = async (message_id) => {
     const response  = await fetch(`${baseUrl}/api/comments/${message_id}`, {
         method: 'GET',
         headers: {"Accept": "application/json"},
