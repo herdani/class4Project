@@ -21,7 +21,15 @@ apiRouter.get('/', function(req, res) {
     const insertMessage = `SELECT * FROM messages where deleted=0;`;
     connection.query(insertMessage, (err, result) => {
         if (err) throw err;
-        res.json(result);
+        // GET RATE
+        const selectRatings = `SELECT * FROM ratings;`;
+        connection.query(selectRatings, (errRatings, resultRatings) => {
+            if (errRatings) throw err;
+            result.forEach(rate => {
+                rate.ratings = resultRatings.filter(x => x.message_id === x.id);
+            });
+            res.json(result);
+        });
     });
 });
 
@@ -58,6 +66,19 @@ apiRouter.post('/message/add', (req, res) => {
         } else {
             console.log(body);
         }
+    });
+});
+
+// POST RATE
+apiRouter.post('/rate/add', (req, res) => {
+    const { rate } = req.body;
+    const { body } = req.body;
+    const { message_id } = req.body;
+    const insertRate = `INSERT INTO ratings (rate,body, submission_date, message_id) VALUES (?,?,now(),?);`;
+    connection.query(insertRate, [rate, body, message_id], (err, result) => {
+        if (err) throw err;
+        console.log(`post request made: ${result}`);
+        res.send(result);
     });
 });
 
