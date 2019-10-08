@@ -81,6 +81,14 @@ apiRouter.post('/rate/add', (req, res) => {
         res.send(result);
     });
 });
+// Get a Rate
+apiRouter.get('/rate/:message_id', function(req, res) {
+    const selectedRatingById = `SELECT * FROM ratings WHERE message_id = ${req.params.message_id};`;
+    connection.query(selectedRatingById, (err, result) => {
+        if (err) throw err;
+        res.json(result);
+    });
+});
 
 // Delete Message
 apiRouter.delete('/message/:id', (req, res) => {
