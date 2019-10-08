@@ -20,6 +20,16 @@ class apiClient {
         });
         return response.json();
     };
+    //POST RATE
+    addRate = async (data) => {
+        const response = await fetch(`${baseUrl}/api/rate/add`, {
+            method: 'POST',
+            headers: { "content-type": "application/json" },
+            mode: 'cors',
+            body: JSON.stringify(data)
+        })
+        return response.json();
+    };
 
     deleteMessage = async id => {
         const response = await fetch(`${baseUrl}/api/message/${id}`, {
