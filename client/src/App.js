@@ -4,12 +4,14 @@ import ApiClient from './apiClient';
 import './App.css';
 import MessageForm from './MessageForm';
 import MessageList from './MessageList';
+import SearchButton from './SearchButton';
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
             messages: [],
+            onChange: null,
         };
     }
 
@@ -29,6 +31,22 @@ class App extends Component {
         this.refreshList();
     };
 
+    handleOnChange = async v => {
+        var searchText = v.toLowerCase();
+        const messages= await ApiClient.allMessage();
+
+        if (searchText !== ""){
+            var filteredMessages = messages.filter(message => message.license_plate.toLowerCase().includes(searchText));
+        this.setState({
+            messages: filteredMessages,
+            onChange: true,
+        });
+
+        }else{
+            this.refreshList();
+        }
+        
+    }
     render() {
         return (
             <BrowserRouter>
@@ -37,7 +55,8 @@ class App extends Component {
                         <h1>Hello License</h1>
                         <p>Send your messages to a plate number easily!</p>
                     </header>
-                    <MessageForm refresher={this.refreshList} />
+                    <MessageForm refreshList={this.refreshList} />
+                    <SearchButton onChangeClick={this.handleOnChange}/>
                 </div>
                 <Switch>
                     <Route
@@ -47,6 +66,7 @@ class App extends Component {
                                 messages={this.state.messages}
                                 {...props}
                                 handleDelete={this.handleDelete}
+                                changing= {this.state.onChange}
                             />
                         )}
                     />

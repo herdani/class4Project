@@ -1,4 +1,10 @@
 const baseUrl = 'http://localhost:8080';
+const init = {
+    headers:{
+        'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+};
 
 class apiClient {
     addMessage = async data => {
@@ -7,6 +13,15 @@ class apiClient {
             headers: { 'content-type': 'application/json' },
             mode: 'cors',
             body: JSON.stringify(data),
+        });
+        return response.json();
+    };
+
+    allMessage = async data => {
+        const response = await fetch(`${baseUrl}/api/message/all`, {
+            method: 'GET',
+            headers: { Accept: 'application/json' },
+            mode: 'cors',
         });
         return response.json();
     };
@@ -29,4 +44,4 @@ class apiClient {
     };
 }
 
-export default new apiClient();
+export default new apiClient;
