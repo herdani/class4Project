@@ -20,6 +20,24 @@ apiRouter.get('/', function(req, res) {
     });
 });
 
+apiRouter.get('/message/all', function(req, res) {
+    const insertMessage = `SELECT * FROM messages`;
+    connection.query(insertMessage, (err, result) => {
+        if (err) throw err;
+        res.json(result);
+    });
+});
+
+apiRouter.get('/message/:license_plate', cors(), (req, res)=> {
+
+    const sql = `SELECT body, submission_date, license_plate FROM messages where license_plate = ?`;
+      connection.query(sql, [req.params.license_plate], (error, results) => {
+          if (error) {
+              return console.error(error.message);
+          }
+          res.send(results);
+  });
+  });
 // Post Message
 apiRouter.post('/message/add', (req, res) => {
     console.log(req.body);

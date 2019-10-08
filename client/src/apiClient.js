@@ -17,6 +17,15 @@ class apiClient {
         return response.json();
     };
 
+    allMessage = async data => {
+        const response = await fetch(`${baseUrl}/api/message/all`, {
+            method: 'GET',
+            headers: { Accept: 'application/json' },
+            mode: 'cors',
+        });
+        return response.json();
+    };
+
     getMessages = async data => {
         const response = await fetch(`${baseUrl}/api`, {
             //route is specified in  server/api/index
