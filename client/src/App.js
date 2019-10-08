@@ -11,7 +11,7 @@ class App extends Component {
         super(props);
         this.state = {
             messages: [],
-            onChange: null,
+            onChange: false,
         };
     }
 
@@ -39,7 +39,7 @@ class App extends Component {
             var filteredMessages = messages.filter(message => message.license_plate.toLowerCase().includes(searchText));
         this.setState({
             messages: filteredMessages,
-            onChange: true,
+            onChange: !this.state.onChange,
         });
 
         }else{
