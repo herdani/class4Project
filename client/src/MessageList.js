@@ -10,7 +10,7 @@ class MessageList extends Component {
     render() {
         const { messages } = this.props;
 
-        messages.sort(function(a, b) {
+        messages.sort(function (a, b) {
             //the list will be ordered in descending date order (most recent first)
             return new Date(b.submission_date) - new Date(a.submission_date);
         });
@@ -22,6 +22,8 @@ class MessageList extends Component {
                 handleDelete={this.props.handleDelete}
             />
         ));
+        console.log($messages);
+
 
         return (
             <section className="MessageList">

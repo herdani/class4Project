@@ -24,9 +24,12 @@ apiRouter.get('/', function(req, res) {
         // GET RATE
         const selectRatings = `SELECT * FROM ratings;`;
         connection.query(selectRatings, (errRatings, resultRatings) => {
+            console.log(resultRatings);
             if (errRatings) throw err;
-            result.forEach(rate => {
-                rate.ratings = resultRatings.filter(x => x.message_id === x.id);
+            const ratingsAdded = result.forEach(rate => {
+                rate.ratings = resultRatings.filter(
+                    x => x.message_id === rate.id
+                );
             });
             res.json(result);
         });

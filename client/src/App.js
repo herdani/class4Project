@@ -4,6 +4,8 @@ import ApiClient from './apiClient';
 import './App.css';
 import MessageForm from './MessageForm';
 import MessageList from './MessageList';
+import RatingForm from './RatingForm';
+
 
 class App extends Component {
     constructor(props) {
@@ -19,6 +21,7 @@ class App extends Component {
 
     refreshList = async () => {
         const messages = await ApiClient.getMessages();
+        console.log(messages);
         this.setState({
             messages,
         });
@@ -28,6 +31,7 @@ class App extends Component {
         await ApiClient.deleteMessage(id);
         this.refreshList();
     };
+
 
     render() {
         return (
@@ -40,6 +44,7 @@ class App extends Component {
                     <MessageForm refresher={this.refreshList} />
                 </div>
                 <Switch>
+                    <Route exact path="/api/message/:id" render={props => <RatingForm messages={this.state.messages} {...props} refresher={this.refreshList} />} />
                     <Route
                         path="/"
                         render={props => (
@@ -48,8 +53,10 @@ class App extends Component {
                                 {...props}
                                 handleDelete={this.handleDelete}
                             />
+
                         )}
                     />
+
                 </Switch>
             </BrowserRouter>
         );
