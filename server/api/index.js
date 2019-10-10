@@ -20,6 +20,7 @@ apiRouter.get('/', function(req, res) {
     });
 });
 
+
 apiRouter.get('/message/all', function(req, res) {
     const insertMessage = `SELECT * FROM messages`;
     connection.query(insertMessage, (err, result) => {
@@ -86,6 +87,27 @@ apiRouter.delete('/message/:id', (req, res) => {
     });
 });
 
+
+apiRouter.post('/comment/add', function(req, res) {
+    const {body,
+        post_id
+    } = req.body;
+    const sql = 'INSERT INTO comments (body, submission_date, post_id) VALUES (?, now(), ?)';
+    connection.query(sql, [body, post_id], (err, results)=> {
+        if(err) throw err;
+        console.log('post request made :' + body  );
+        res.send(results);
+    });
+});
+
+apiRouter.get('/comment', function (req, res) {
+    const sql = 'SELECT * from comments';
+    connection.query(sql, (error, results)=> {
+        if (error) throw error;
+        console.log(results)
+        res.send(results);
+    });
+});
 // Application initialization
 
 module.exports = apiRouter;

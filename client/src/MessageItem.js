@@ -2,8 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import ShareButton from './ShareButton'
 import './MessageItem.css';
-
-export default ({ id, submission_date, license_plate, body, handleDelete, changing }) => {
+import CommentSection from './CommentSection'
+export default ({ id, submission_date, license_plate, body, handleDelete, changing, refreshList, comments }) => {
     var timePosted = moment(submission_date).format('DD/MM/YYYY - HH:mm');
 
          return (
@@ -13,6 +13,7 @@ export default ({ id, submission_date, license_plate, body, handleDelete, changi
             <span> {body} </span>
             <button disabled={changing ? true:false} onClick={() => handleDelete(id)}>X</button>
             <ShareButton></ShareButton>
+            <CommentSection comments={comments} post_id={id} refreshList={refreshList}/>
         </li>
 
          );

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './MessageList.css';
 import MessageItem from './MessageItem';
-import ApiClient from './apiClient'
-
 
 class MessageList extends Component {
     constructor(props) {
@@ -11,7 +9,7 @@ class MessageList extends Component {
    
     
     render() {
-        const { messages, changing } = this.props;
+        const { messages, changing, comments } = this.props;
                
         messages.sort(function(a, b) {
             //the list will be ordered in descending date order (most recent first)
@@ -20,10 +18,12 @@ class MessageList extends Component {
 
         const $messages = messages.map(message => (
             <MessageItem
-                key={message._id}
+                key={message.id}
                 {...message}
                 handleDelete={this.props.handleDelete}
                 changing={changing}
+                refreshList={this.props.refreshList}
+                comments={comments}
             />
         ));
 

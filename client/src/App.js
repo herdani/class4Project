@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import ApiClient from './apiClient';
+import apiClient from './apiClient';
 import './App.css';
 import MessageForm from './MessageForm';
 import MessageList from './MessageList';
@@ -12,6 +12,7 @@ class App extends Component {
         this.state = {
             messages: [],
             onChange: false,
+            comments: [],
         };
     }
 
@@ -20,20 +21,22 @@ class App extends Component {
     };
 
     refreshList = async () => {
-        const messages = await ApiClient.getMessages();
+        const messages = await apiClient.getMessages();
+       const comments = await apiClient.getComments()
         this.setState({
             messages,
+            comments,
         });
     };
 
     handleDelete = async id => {
-        await ApiClient.deleteMessage(id);
+        await apiClient.deleteMessage(id);
         this.refreshList();
     };
 
     handleOnChange = async v => {
         var searchText = v.toLowerCase();
-        const messages= await ApiClient.allMessage();
+        const messages= await apiClient.allMessage();
 
         if (searchText !== ""){
             var filteredMessages = messages.filter(message => message.license_plate.toLowerCase().includes(searchText));
@@ -67,6 +70,8 @@ class App extends Component {
                                 {...props}
                                 handleDelete={this.handleDelete}
                                 changing= {this.state.onChange}
+                                refreshList={this.refreshList}
+                                comments={this.state.comments}
                             />
                         )}
                     />
