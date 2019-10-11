@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import api from './apiClient';
+import UploadPhoto from './UploadPhoto';
 import './MessageForm.css';
 
 class MessageForm extends Component {
@@ -17,8 +18,12 @@ class MessageForm extends Component {
             license_plate: messageData.get('license'),
             body: messageData.get('body')
         });
-        
+
         this.props.refresher();
+    };
+    handleImageChange = async (event) => {
+      event.preventDefault();
+      console.log("handle Image");
     };
 
     render() {
@@ -32,6 +37,7 @@ class MessageForm extends Component {
                     <label htmlFor="body">Message</label>
                     <textarea id="body" name="body" type="text"/>
                 </div>
+                <UploadPhoto handleImageChange = {this.handleImageChange} imageFile = {"./platenumber.png"}/>
                 <div>
                     <input type="submit" value="Submit"/>
                 </div>
