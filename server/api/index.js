@@ -17,14 +17,14 @@ connection.connect();
 apiRouter.use(bodyParser.json());
 
 // Used list_existing_messages
-apiRouter.get('/', function(req, res) {
+apiRouter.get('/', function (req, res) {
     const insertMessage = `SELECT * FROM messages where deleted=0;`;
     connection.query(insertMessage, (err, result) => {
         if (err) throw err;
         // GET RATE
         const selectRatings = `SELECT * FROM ratings;`;
         connection.query(selectRatings, (errRatings, resultRatings) => {
-            console.log(resultRatings);
+            // console.log(resultRatings);
             if (errRatings) throw err;
             const ratingsAdded = result.forEach(rate => {
                 rate.ratings = resultRatings.filter(
@@ -63,7 +63,7 @@ apiRouter.post('/message/add', (req, res) => {
         text: req.body.body,
     };
 
-    mailgun.messages().send(data, function(error, body) {
+    mailgun.messages().send(data, function (error, body) {
         if (error) {
             console.log(error);
         } else {
@@ -85,7 +85,7 @@ apiRouter.post('/rate/add', (req, res) => {
     });
 });
 // Get a Rate
-apiRouter.get('/rate/:message_id', function(req, res) {
+apiRouter.get('/rate/:message_id', function (req, res) {
     const selectedRatingById = `SELECT * FROM ratings WHERE message_id = ${req.params.message_id};`;
     connection.query(selectedRatingById, (err, result) => {
         if (err) throw err;

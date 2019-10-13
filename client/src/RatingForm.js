@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import api from './apiClient';
 import './RatingForm.css';
-import { log } from 'util';
+import { Link } from 'react-router-dom';
 
 class RatingForm extends Component {
     constructor(props) {
@@ -34,11 +34,10 @@ class RatingForm extends Component {
 
     render() {
 
-
-
-
         return (
             <form onSubmit={this.handleSubmit} className="RatingForm">
+                <Link className="btn" to={`/api`}>Back</Link>
+                <h1>Rating a Message</h1>
                 <div>
                     <label htmlFor="license">Rating</label>
                     <input id="rate" name="rate" type="number" />

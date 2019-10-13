@@ -44,7 +44,7 @@ class App extends Component {
                     <MessageForm refresher={this.refreshList} />
                 </div>
                 <Switch>
-                    <Route exact path="/api/message/:id" render={props => <RatingForm messages={this.state.messages} {...props} refresher={this.refreshList} />} />
+                    <Route exact path="/api/rate/:id" render={props => <RatingForm messages={this.state.messages} {...props} refresher={this.refreshList} />} />
                     <Route
                         path="/"
                         render={props => (
