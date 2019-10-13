@@ -16,6 +16,8 @@ Here we list all changes we made to the database structure.
 Don't forget to check this out for new lines after you pulled new code
 
 `` ALTER TABLE `class4project`.`messages` ADD COLUMN `deleted` TINYINT NULL DEFAULT 0 AFTER `license_plate`; ``
+ALTER TABLE `messages` ADD `imgFile` BLOB NULL AFTER `deleted`;
+
 ### Database for table "comments"
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL,

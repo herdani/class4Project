@@ -5,8 +5,8 @@ const UploadPhoto = props => {
   return (
       <div>
         <p>Do you have pictures to post?</p>
-        <input type="file" onChange={() => handleImageChange()}/>
-        <img src={imageFile}/>
+        <input type="file" onChange={handleImageChange}/>
+        <img src={imageFile} alt={imageFile}/>
       </div>
     );
 }
