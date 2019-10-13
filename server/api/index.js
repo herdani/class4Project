@@ -17,11 +17,22 @@ connection.connect();
 apiRouter.use(bodyParser.json());
 
 // Used list_existing_messages
-apiRouter.get('/', function(req, res) {
+apiRouter.get('/', function (req, res) {
     const insertMessage = `SELECT * FROM messages where deleted=0;`;
     connection.query(insertMessage, (err, result) => {
         if (err) throw err;
-        res.json(result);
+        // GET RATE
+        const selectRatings = `SELECT * FROM ratings;`;
+        connection.query(selectRatings, (errRatings, resultRatings) => {
+            // console.log(resultRatings);
+            if (errRatings) throw err;
+            const ratingsAdded = result.forEach(rate => {
+                rate.ratings = resultRatings.filter(
+                    x => x.message_id === rate.id
+                );
+            });
+            res.json(result);
+        });
     });
 });
 
@@ -52,12 +63,33 @@ apiRouter.post('/message/add', (req, res) => {
         text: req.body.body,
     };
 
-    mailgun.messages().send(data, function(error, body) {
+    mailgun.messages().send(data, function (error, body) {
         if (error) {
             console.log(error);
         } else {
             console.log(body);
         }
+    });
+});
+
+// POST RATE
+apiRouter.post('/rate/add', (req, res) => {
+    const { rate } = req.body;
+    const { body } = req.body;
+    const { message_id } = req.body;
+    const insertRate = `INSERT INTO ratings (rate,body, submission_date, message_id) VALUES (?,?,now(),?);`;
+    connection.query(insertRate, [rate, body, message_id], (err, result) => {
+        if (err) throw err;
+        console.log(`post request made: ${result}`);
+        res.send(result);
+    });
+});
+// Get a Rate
+apiRouter.get('/rate/:message_id', function (req, res) {
+    const selectedRatingById = `SELECT * FROM ratings WHERE message_id = ${req.params.message_id};`;
+    connection.query(selectedRatingById, (err, result) => {
+        if (err) throw err;
+        res.json(result);
     });
 });
 
